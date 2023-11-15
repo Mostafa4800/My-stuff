@@ -1,0 +1,45 @@
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Kumbh Sans', sans-serif;
+        scroll-behavior: smooth;
+        background-color: black;
+    }
+    
+    body {
+        height: 100vh;
+        display: grid;
+        grid-template-rows: 2fr 10fr2fr;
+    }
+    
+    .header {
+        color: grey;
+        display: grid;
+        place-items: center;
+        text-align: center;
+    }
+    
+    .monkey {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .text {
+        color: white;
+        display: grid;
+        place-items: center;
+        text-align: center;
+    }
+    
+    .valuta {
+        color: white;
+        display: grid;
+        place-items: center;
+    }
+    
+    .temp {
+        color: white;
+        display: grid;
+        place-items: center;
+    }

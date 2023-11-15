@@ -1,0 +1,69 @@
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        display: grid;
+        grid-auto-flow: column;
+    }
+    
+    body {
+        display: grid;
+        grid-auto-flow: column;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+    }
+    
+    .page {
+        display: grid;
+        place-items: center;
+        height: 100vh;
+        width: 100vw;
+        position: fixed;
+        left: -100vw;
+        transition: all 0.5s 0.5s ease-in-out;
+    }
+    
+    .show {
+        left: 0;
+        transition: all 0.5s ease-in-out;
+    }
+    
+    #page1 {
+        background: orange;
+    }
+    
+    #page2 {
+        background: orangered;
+    }
+    
+    #page3 {
+        background: greenyellow;
+    }
+    
+    #page4 {
+        background: hotpink;
+    }
+    
+    canvas {
+        display: block;
+    }
+    
+    .menu {
+        position: fixed;
+        height: 12vh;
+        background-color: black;
+        width: 100vw;
+        bottom: 0;
+        color: white;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .menuitem {
+        display: grid;
+        place-items: center;
+        border: 1px solid hotpink;
+        cursor: pointer;
+    }

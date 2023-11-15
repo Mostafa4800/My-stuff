@@ -1,0 +1,27 @@
+            body {
+                background-color: #f4f4f4;
+                color: #555555;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 16px;
+                font-weight: normal;
+                /* same as above*/
+                font: normal 16px Arial, Helvetica, sans-serif;
+                line-height: 1.6em;
+                margin: 0cm;
+            }
+            
+            .container {
+                width: 80%;
+                margin: auto;
+            }
+            
+            .box-1 {
+                background-color: #333;
+                color: #fff;
+                border-right: 5px red solid;
+                border-left: 5px red solid;
+                border-top: 5px red solid;
+                border-bottom: 5px red solid;
+                /*same thing as above*/
+                border: 5px red solid;
+            }
