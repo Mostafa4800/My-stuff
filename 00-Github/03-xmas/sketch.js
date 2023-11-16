@@ -1,22 +1,5 @@
 let doorContent;
-let doorX = 40;
-let doorY = 40;
 let doors = [];
-let radius = 40;
-let surprise = [{
-        "type": "image",
-        "url": "jul.jpg"
-    },
-    {
-        "type": "video",
-        "url": "christmas.avi"
-    },
-    {
-        "type": "image",
-        "url": "winter.png"
-    },
-]
-
 
 function preload() {
     doorContent = loadImage("assets/img1.PNG");
@@ -25,16 +8,30 @@ function preload() {
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
-    // Create a number of doors
     for (let i = 0; i < 24; i += 1) {
         let photo = doorContent;
-        // Create a door and add it to the array
-        doors.push(new Door(doorX, doorY, radius, photo));
-        doorX += radius * 2;
-        if (doorX > width - radius * 2) {
-            doorX = radius;
-            doorY += 80;
+
+        // Randomly generate non-overlapping positions
+        let overlapping = true;
+        let attemptCount = 0;
+        let newDoorX, newDoorY, newRadius;
+
+        while (overlapping && attemptCount < 100) {
+            newRadius = random(60, 80); // Adjust the range for random sizes
+            newDoorX = random(newRadius, width - newRadius);
+            newDoorY = random(newRadius, height - newRadius);
+
+            // Check for overlaps with existing doors
+            overlapping = doors.some(door => {
+                let distance = dist(newDoorX, newDoorY, door.x, door.y);
+                return distance < newRadius + door.radius;
+            });
+
+            attemptCount++;
         }
+
+        // Create a door and add it to the array
+        doors.push(new Door(newDoorX, newDoorY, newRadius, photo, i + 1)); // Assign a unique number (i + 1) to each door
     }
 }
 
@@ -57,29 +54,41 @@ function mousePressed() {
     }
 }
 
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+
+}
+
+
 class Door {
-    constructor(x, y, radius, photo) {
+    constructor(x, y, radius, photo, id) {
         this.x = x;
         this.y = y;
         this.radius = radius;
         this.photo = photo;
-        this.doorOpen = false; // Each door has its own state
+        this.doorOpen = false;
+        this.id = id; // Assign a unique number to each door
     }
 
     valueChecker() {
         this.doorOpen = !this.doorOpen;
-        console.log(this.doorOpen);
+        console.log(`Door ${this.id} is open: ${this.doorOpen}`);
     }
 
     display() {
         if (this.doorOpen) {
             image(this.photo, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
-            text("a door is open", 20, 40);
+            fill("black");
+            textAlign(CENTER, CENTER);
+            textSize(24);
+            // text(`${this.id}`, this.x, this.y);
         } else {
             fill("red");
             ellipse(this.x, this.y, this.radius * 2);
             fill("black");
-            text("a door is closed", 20, 20);
+            textAlign(CENTER, CENTER);
+            textSize(24);
+            text(` Door ${this.id}`, this.x, this.y);
         }
     }
 }
