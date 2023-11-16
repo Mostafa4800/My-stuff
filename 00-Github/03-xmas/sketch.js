@@ -74,12 +74,12 @@ class Door {
     display() {
         if (this.doorOpen) {
             image(this.photo, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
-            text("door is open", 20, 20);
+            text("a door is open", 20, 40);
         } else {
             fill("red");
             ellipse(this.x, this.y, this.radius * 2);
             fill("black");
-            text("door is closed", 20, 20);
+            text("a door is closed", 20, 20);
         }
     }
 }
