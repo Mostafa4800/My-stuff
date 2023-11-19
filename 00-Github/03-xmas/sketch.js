@@ -1,3 +1,4 @@
+let ellipseStartR = 1920;
 let doorContent;
 let doors = []
 let surprises = [
@@ -77,6 +78,15 @@ function draw() {
             location.href = surprises[i]
         }
     }
+
+    // This code is just to make it more convenient when switched from page to page
+    if (ellipseStartR > 0) {
+        fill("red");
+        ellipse(width / 2, height / 2, ellipseStartR);
+        ellipseStartR -= 10;
+    }
+
+
 }
 
 function mousePressed() {
