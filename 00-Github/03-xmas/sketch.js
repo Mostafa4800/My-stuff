@@ -16,7 +16,7 @@ function setup() {
         let attemptCount = 0;
         let newDoorX, newDoorY, newRadius;
 
-        while (overlapping && attemptCount < 100) {
+        while (overlapping && attemptCount < 100000) {
             newRadius = random(60, 80); // Adjust the range for random sizes
             newDoorX = random(newRadius, width - newRadius);
             newDoorY = random(newRadius, height - newRadius);
@@ -31,15 +31,31 @@ function setup() {
         }
 
         // Create a door and add it to the array
-        doors.push(new Door(newDoorX, newDoorY, newRadius, photo, i + 1)); // Assign a unique number (i + 1) to each door
+        doors.push(new Door(newDoorX, newDoorY, newRadius, newRadius, photo, i + 1)); // Assign a unique number (i + 1) to each door
     }
 }
 
 function draw() {
     background(220);
 
+    // Draw doors that are not being clicked
     for (let i = 0; i < doors.length; i++) {
-        doors[i].display();
+        if (!doors[i].doorOpen) {
+            doors[i].display();
+        }
+    }
+
+    // Draw the expanding door last
+    for (let i = 0; i < doors.length; i++) {
+        if (doors[i].doorOpen) {
+            doors[i].display();
+
+        }
+        if (doors[i].radius >= (width + height) / 1.5) {
+            location.href = "surprises/surprise1/index.html"
+            fill("black")
+            text("hi its working", width / 2, height / 2)
+        }
     }
 }
 
@@ -61,10 +77,11 @@ function windowResized() {
 
 
 class Door {
-    constructor(x, y, radius, photo, id) {
+    constructor(x, y, radius, dRadius, photo, id) {
         this.x = x;
         this.y = y;
         this.radius = radius;
+        this.newRadius = dRadius;
         this.photo = photo;
         this.doorOpen = false;
         this.id = id; // Assign a unique number to each door
@@ -77,10 +94,14 @@ class Door {
 
     display() {
         if (this.doorOpen) {
-            image(this.photo, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
+            fill("red")
+            ellipse(this.x, this.y, this.radius * 2);
             fill("black");
             textAlign(CENTER, CENTER);
             textSize(24);
+            if (this.radius < (width + height) / 1.5) {
+                this.radius += 10;
+            }
             // text(`${this.id}`, this.x, this.y);
         } else {
             fill("red");
@@ -89,6 +110,9 @@ class Door {
             textAlign(CENTER, CENTER);
             textSize(24);
             text(` Door ${this.id}`, this.x, this.y);
+            if (this.radius > this.newRadius) {
+                this.radius -= 10;
+            }
         }
     }
 }
