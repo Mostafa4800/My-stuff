@@ -1,9 +1,31 @@
 let doorContent;
-let doors = [];
-
-function preload() {
-    doorContent = loadImage("assets/img1.PNG");
-}
+let doors = []
+let surprises = [
+    "surprises/surprise1/index.html",
+    "surprises/surprise2/index.html",
+    "surprises/surprise3/index.html",
+    "surprises/surprise4/index.html",
+    "surprises/surprise5/index.html",
+    "surprises/surprise6/index.html",
+    "surprises/surprise7/index.html",
+    "surprises/surprise8/index.html",
+    "surprises/surprise9/index.html",
+    "surprises/surprise10/index.html",
+    "surprises/surprise11/index.html",
+    "surprises/surprise12/index.html",
+    "surprises/surprise13/index.html",
+    "surprises/surprise14/index.html",
+    "surprises/surprise15/index.html",
+    "surprises/surprise16/index.html",
+    "surprises/surprise17/index.html",
+    "surprises/surprise18/index.html",
+    "surprises/surprise19/index.html",
+    "surprises/surprise20/index.html",
+    "surprises/surprise21/index.html",
+    "surprises/surprise22/index.html",
+    "surprises/surprise23/index.html",
+    "surprises/surprise24/index.html"
+];
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -52,9 +74,7 @@ function draw() {
 
         }
         if (doors[i].radius >= (width + height) / 1.5) {
-            location.href = "surprises/surprise1/index.html"
-            fill("black")
-            text("hi its working", width / 2, height / 2)
+            location.href = surprises[i]
         }
     }
 }
