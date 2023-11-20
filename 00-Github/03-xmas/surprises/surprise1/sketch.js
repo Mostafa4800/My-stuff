@@ -32,7 +32,7 @@ function onVideoLoad() {
 function goBack() {
     backButton.hide();
     if (ellipseEndR < 1920) {
-        nosStroke();
+        noStroke();
         fill("red");
         ellipse(width / 2, height / 2, ellipseEndR);
         ellipseEndR += 10;
