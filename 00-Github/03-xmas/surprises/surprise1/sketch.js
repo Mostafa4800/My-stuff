@@ -7,10 +7,15 @@ let backgroundImg;
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
-    videoElement = createVideo(["itsTime.mp4"]), onVideoLoad;
-    videoElement.show();
+    videoElement = createVideo("assets/itsTime.mp4");
+    videoElement.size(width, height);
+    videoElement.hide();
 
-    backgroundImg = loadImage("itsTime.png");
+    videoElement.onended(() => {
+        backButton.show();
+    });
+
+    backgroundImg = loadImage("assets/itsTime.png");
 
     // Create the button but initially hide it
     backButton = createButton("Go back");
@@ -21,14 +26,6 @@ function setup() {
     backButton.mousePressed(goBack);
 }
 
-function onVideoLoad() {
-    // The media will not play until some explicitly triggered.
-    videoElement.autoplay(false);
-    videoElement.volume(0);
-    videoElement.size(100, 100);
-}
-
-
 function goBack() {
     backButton.hide();
     if (ellipseEndR < 1920) {
@@ -37,7 +34,6 @@ function goBack() {
         ellipse(width / 2, height / 2, ellipseEndR);
         ellipseEndR += 10;
         requestAnimationFrame(goBack); // Call the function again on the next frame
-
     } else {
         window.location.href = "../../index.html";
     }
@@ -60,7 +56,6 @@ function draw() {
         if (ellipseStartR <= 0) {
             backButton.show();
             videoElement.play();
-
         }
     }
 }
