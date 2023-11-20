@@ -1,5 +1,6 @@
 let ellipseStartR = 1920;
 let doorContent;
+let speed = 20;
 let doors = []
 let surprises = [
     "surprises/surprise1/index.html",
@@ -83,7 +84,7 @@ function draw() {
     if (ellipseStartR > 0) {
         fill("red");
         ellipse(width / 2, height / 2, ellipseStartR);
-        ellipseStartR -= 10;
+        ellipseStartR -= speed;
     }
 
 
@@ -130,7 +131,7 @@ class Door {
             textAlign(CENTER, CENTER);
             textSize(24);
             if (this.radius < (width + height) / 1.5) {
-                this.radius += 10;
+                this.radius += speed;
             }
             // text(`${this.id}`, this.x, this.y);
         } else {
