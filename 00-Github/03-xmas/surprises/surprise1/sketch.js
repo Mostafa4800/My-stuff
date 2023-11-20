@@ -32,6 +32,7 @@ function onVideoLoad() {
 function goBack() {
     backButton.hide();
     if (ellipseEndR < 1920) {
+        nosStroke();
         fill("red");
         ellipse(width / 2, height / 2, ellipseEndR);
         ellipseEndR += 10;
@@ -51,6 +52,7 @@ function draw() {
 
     // This code is just to make it more convenient when switched from page to page
     if (ellipseStartR > 0) {
+        noStroke();
         fill("red");
         ellipse(width / 2, height / 2, ellipseStartR);
         ellipseStartR -= 10;
