@@ -130,8 +130,9 @@ class Door {
             fill("black");
             textAlign(CENTER, CENTER);
             textSize(24);
-            if (this.radius < (width + height) / 1.5) {
+            if (this.radius < 1920) {
                 this.radius += speed;
+                console.log("increasing size of the door")
             }
             // text(`${this.id}`, this.x, this.y);
         } else {
