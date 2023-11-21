@@ -4,10 +4,23 @@ let backButton;
 let videoElement;
 let backgroundImg;
 let speed = 20;
+let startVideoFrame;
+let videoId = 'bikjZBdfDZY'; // YouTube video ID
+let apiKey = 'AIzaSyAF2z2DthVDBVU9RUueYdQQdCUkmtY-wVs'; // my api key
 
 function preload() {
-    videoElement = createVideo("https://youtu.be/bikjZBdfDZY");
+    // Use YouTube Data API to get video details, including the video URL
+    loadJSON(
+        `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${apiKey}&part=snippet,contentDetails`,
+        gotVideoData
+    );
+}
 
+
+function gotVideoData(data) {
+    // Extract video URL from the API response
+    let videoUrl = `https://www.youtube.com/embed/${videoId}?controls=0`;
+    videoElement = createVideo(videoUrl);
 }
 
 function setup() {
@@ -15,10 +28,6 @@ function setup() {
 
     videoElement.size(width, height);
     videoElement.hide();
-
-    videoElement.onended(() => {
-        backButton.show();
-    });
 
     backgroundImg = loadImage("assets/beeMovie.png");
 
@@ -38,6 +47,10 @@ function goBack() {
         fill("red");
         ellipse(width / 2, height / 2, ellipseEndR);
         ellipseEndR += speed;
+        // Start the video after a certain number of frames
+        if (frameCount > startVideoFrame) {
+            videoElement.play();
+        }
         requestAnimationFrame(goBack); // Call the function again on the next frame
     } else {
         window.location.href = "../../index.html";
@@ -60,7 +73,8 @@ function draw() {
         // If the circle is fully drawn, show the button
         if (ellipseStartR <= 0) {
             backButton.show();
-            videoElement.play();
+            // Set the startVideoFrame to the current frameCount
+            startVideoFrame = frameCount;
         }
     }
 }
