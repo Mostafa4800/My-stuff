@@ -6,7 +6,7 @@ let backgroundImg;
 let speed = 20;
 
 function preload() {
-    videoElement = createVideo("assets/beeMovie.mp4");
+    videoElement = createVideo("https://youtu.be/bikjZBdfDZY");
 
 }
 
