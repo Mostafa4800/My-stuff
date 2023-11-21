@@ -1,6 +1,7 @@
 let ellipseStartR = 1920;
 let ellipseEndR = 0;
 let backButton;
+let speed = 20;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -20,7 +21,7 @@ function goBack() {
         background(220); // Clear the canvas on each frame
         fill("red");
         ellipse(width / 2, height / 2, ellipseEndR);
-        ellipseEndR += 10;
+        ellipseEndR += speed;
         requestAnimationFrame(goBack); // Call the function again on the next frame
     } else {
         window.location.href = "../../index.html";
@@ -33,7 +34,7 @@ function draw() {
     if (ellipseStartR > 0) {
         fill("red");
         ellipse(width / 2, height / 2, ellipseStartR);
-        ellipseStartR -= 10;
+        ellipseStartR -= speed;
 
         // If the circle is fully drawn, show the button
         if (ellipseStartR <= 0) {
