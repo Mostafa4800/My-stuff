@@ -1,7 +1,19 @@
 let ellipseStartR = 1920;
 let ellipseEndR = 0;
 let backButton;
-let currentPage = '#page1'
+let CurrentPage = "#page1"
+
+function setup() {
+    select("#item1").mouseClicked(() => switchPage("#page1"))
+    select("#item2").mouseClicked(() => switchPage("#page2"))
+}
+
+function switchPage(whichPage) {
+    select(CurrentPage).removeClass('show')
+    select(whichPage).addClass('show')
+    CurrentPage = whichPage
+}
+
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -44,18 +56,7 @@ function draw() {
 }
 
 
-function setup() {
-    select('#item1').mouseClicked(() => switchPage('#page1'))
-    select('#item2').mouseClicked(() => switchPage('#page2'))
-    select('#item3').mouseClicked(() => switchPage('#page3'))
-    select('#item4').mouseClicked(() => switchPage('#page4'))
-}
 
-function switchPage(whichPage) {
-    select(currentPage).removeClass('show')
-    select(whichPage).addClass('show')
-    currentPage = whichPage
-}
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);

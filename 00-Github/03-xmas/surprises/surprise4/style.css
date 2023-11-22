@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'I hate Comic Sans', sans-serif;
+    font-family: 'I hate Comic Sans', sans-serif
 }
 
 body {
@@ -32,14 +32,14 @@ body {
 .menuitem {
     display: grid;
     place-items: center;
-    border: 7px solid #067084;
+    border: 7px solid #146B3A;
     cursor: pointer;
 }
 
 .menu {
     position: fixed;
     height: 10vh;
-    background-color: red;
+    background-color: #EA4630;
     width: 100vw;
     bottom: 0;
     color: black;
@@ -81,7 +81,10 @@ body {
 }
 
 #page2 {
-    background-color: #067084;
+    background-image: url('https://media.discordapp.net/attachments/794619660078940215/1176880526473310320/image.png?ex=65707a66&is=655e0566&hm=8c5256e552a917e44474f57b97c8fe21ff51e6c8a808b4fbf7c956b0f761eb81&=&format=webp&width=661&height=491');
+    background-repeat: no-repeat;
+    background-position: center absolute;
+    background-size: 100vw 90vh;
 }
 
 canvas {
