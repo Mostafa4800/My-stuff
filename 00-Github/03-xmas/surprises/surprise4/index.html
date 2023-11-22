@@ -1,18 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Sketch</title>
+    <title>The fourth</title>
 
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.sound.min.js"></script>
-  </head>
+</head>
 
-  <body>
+<body>
+    <div class="page show" id="page1">
+        <div class="title">
+            <img id="img1" src="https://cdn.discordapp.com/attachments/426425328982818826/1176803412327813190/IMG_20231115_1056072.jpg?ex=65703295&amp;is=655dbd95&amp;hm=30d1f450423342b3dc366f8ac018e17a59165fb34cf2bb31976f2d43abc49641&amp;">
+            <div class="h1">
+                <h1>Nogle 2.G'ers forsøg på at lave øl</h1>
+            </div>
+        </div>
+        <div class="p">
+            <p>6 forskellige 2.g elever har fået opgaven af at lave øl</p> <br>
+            <p>(Valget af at lave en hjemmeside var en dårlig ide)</p>
+        </div>
+        <!-- DETTE SKAL ÆNDRES -->
+    </div>
+    <div class="page" id="page2">
+        <div class="title">
+            <div class="h1">
+                <h1>Teori</h1>
+
+            </div>
+        </div>
+    </div>
+    <div class="page" id="page3">
+        <div class="title">
+
+        </div>
+    </div>
+    <div class="page" id="page4">
+        <div class="title">
+
+        </div>
+    </div>
+
+
+
+    <div class="menu">
+        <div class="menuitem" id="item1">
+            <h2>Forside</h2>
+        </div>
+        <div class="menuitem" id="item2">
+            <h2>Teori</h2>
+        </div>
+        <div class="menuitem" id="item3">
+            <h2>Fremgangsmåde</h2>
+        </div>
+        <div class="menuitem" id="item4">
+            <h2>VORES ØL!</h2>
+        </div>
+    </div>
+
     <script src="sketch.js"></script>
-  </body>
+    <!-- Code injected by live-server -->
+    <script>
+        // <![CDATA[  <-- For SVG support
+        if ('WebSocket' in window) {
+            (function() {
+                function refreshCSS() {
+                    var sheets = [].slice.call(document.getElementsByTagName("link"));
+                    var head = document.getElementsByTagName("head")[0];
+                    for (var i = 0; i < sheets.length; ++i) {
+                        var elem = sheets[i];
+                        var parent = elem.parentElement || head;
+                        parent.removeChild(elem);
+                        var rel = elem.rel;
+                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                        }
+                        parent.appendChild(elem);
+                    }
+                }
+                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                var address = protocol + window.location.host + window.location.pathname + '/ws';
+                var socket = new WebSocket(address);
+                socket.onmessage = function(msg) {
+                    if (msg.data == 'reload') window.location.reload();
+                    else if (msg.data == 'refreshcss') refreshCSS();
+                };
+                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                    console.log('Live reload enabled.');
+                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                }
+            })();
+        } else {
+            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+        }
+        // ]]>
+    </script>
+
+    <main><canvas id="defaultCanvas0" class="p5Canvas" width="1876" height="1484" style="width: 938px; height: 742px;"></canvas></main>
+</body>
+
+<body>
+    <script src="sketch.js"></script>
+</body>
+
 </html>
