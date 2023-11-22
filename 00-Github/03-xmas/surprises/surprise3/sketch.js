@@ -1,30 +1,19 @@
 let player1;
-//player 1 is on the left
 let player2;
-//player 2 is on the right
-let y = 540;
-let x = 960;
-//this is the speed as the ball have been set as
+let y;
+let x;
 const speed = 10;
-//This will keep the score for Player 1
 let score1 = 0;
-//This will keep the score for Player 2
 let score2 = 0;
-
-//start game
 let start;
-
-//win screen p1 and p2
 let p1Win;
 let p2Win;
 let pressT;
-
-//scoring sound for when u get a point
 var scoreSound;
-
 let ellipseStartR = 1920;
 let ellipseEndR = 0;
 let backButton;
+let fadeSpeed = 10;
 
 function preload() {
     scoreSound = loadSound("Score.mp3");
@@ -35,48 +24,48 @@ function setup() {
 
     allSprites.collider = 'static';
 
+    y = height;
+    x = width;
 
-    //top and bottom walls
     wallTop = new Sprite(width / 2, 0, width, 2);
     wallTop.color = 'white';
+
     wallBottom = new Sprite(width / 2, height, width, 2);
     wallBottom.color = 'white';
 
     player1 = new Sprite();
     player1.color = 'Blue';
     player1.w = 10;
-    player1.h = 100;
-    player1.pos = { x: 80, y: y / 2 };
-
+    player1.h = height * 0.2;
+    player1.pos = { x: width * 0.1, y: height / 2 };
 
     player2 = new Sprite();
     player2.color = 'Red';
     player2.w = 10;
-    player2.h = 100;
-    player2.pos = { x: 880, y: y / 2 };
+    player2.h = height * 0.2;
+    player2.pos = { x: width * 0.9, y: height / 2 };
 
-    //score text display
     s1 = new Sprite();
     s1.textColor = "white";
     s1.color = "black";
-    s1.textSize = 20;
-    s1.pos = { x: 460, y: 80 };
+    s1.textSize = width * 0.03;
+    s1.pos = { x: width * 0.2, y: height * 0.1 };
     s1.stroke = "black";
     s1.collider = 'none';
 
     s2 = new Sprite();
     s2.textColor = "white";
     s2.color = "black";
-    s2.textSize = 20;
-    s2.pos = { x: 500, y: 80 };
+    s2.textSize = width * 0.03;
+    s2.pos = { x: width * 0.8, y: height * 0.1 };
     s2.stroke = "black";
     s2.collider = 'none';
 
     start = new Sprite();
     start.textColor = "white";
     start.color = "black";
-    start.textSize = 40;
-    start.pos = { x: x / 2, y: y / 2 - 100 };
+    start.textSize = width * 0.05;
+    start.pos = { x: width / 2, y: height / 2 - height * 0.1 };
     start.text = 'Press T to start a game';
     start.stroke = "black";
     start.collider = 'none';
@@ -85,8 +74,8 @@ function setup() {
     p1Win = new Sprite();
     p1Win.textColor = "blue";
     p1Win.color = "black";
-    p1Win.textSize = 40;
-    p1Win.pos = { x: x / 2, y: y / 2 - 150 };
+    p1Win.textSize = width * 0.05;
+    p1Win.pos = { x: width / 2, y: height / 2 - height * 0.15 };
     p1Win.text = 'Player 1 Wins';
     p1Win.stroke = "black";
     p1Win.collider = 'none';
@@ -95,8 +84,8 @@ function setup() {
     p2Win = new Sprite();
     p2Win.textColor = "Red";
     p2Win.color = "black";
-    p2Win.textSize = 40;
-    p2Win.pos = { x: x / 2, y: y / 2 - 150 };
+    p2Win.textSize = width * 0.05;
+    p2Win.pos = { x: width / 2, y: height / 2 - height * 0.15 };
     p2Win.text = 'Player 2 Wins';
     p2Win.stroke = "black";
     p2Win.collider = 'none';
@@ -105,14 +94,14 @@ function setup() {
     pressT = new Sprite();
     pressT.textColor = "white";
     pressT.color = "black";
-    pressT.textSize = 40;
-    pressT.pos = { x: x / 2, y: y / 2 - 100 };
+    pressT.textSize = width * 0.05;
+    pressT.pos = { x: width / 2, y: height / 2 - height * 0.1 };
     pressT.text = 'Press T to start a new game';
     pressT.stroke = "black";
     pressT.collider = 'none';
     pressT.visible = false;
 
-    ball = new Sprite(width / 2, height / 2, 10, 10, 'dynamic');
+    ball = new Sprite(width / 2, height / 2, width * 0.015, width * 0.015, 'dynamic');
 
     ball.collide(player1, () => {
         ball.direction -= (ball.y - player1.y) * 0.5;
@@ -124,73 +113,58 @@ function setup() {
         ball.speed = speed;
     });
 
-    ball.diameter = 15;
     ball.bounciness = 1;
     ball.rotationLock = true;
     ball.speed = 0;
     ball.friction = 0;
     ball.color = 'white';
 
-    // Create the button but initially hide it
     backButton = createButton("Go back");
     backButton.position(20, 20);
     backButton.hide();
-
-    // Set up mousePressed event for the button
     backButton.mousePressed(goBack);
 }
-
-
-
 
 function draw() {
     clear();
     background(0);
 
-    //start game
     if (start.visible == true && kb.pressing('t')) {
         start.visible = false;
         ball.speed = speed;
     }
 
-    //text for point
     s1.text = score1;
     s2.text = score2;
 
     if (kb.pressing('w') && player1.y > wallTop.y) {
-        player1.y -= 12;
+        player1.y -= height * 0.03;
     } else if (kb.pressing('s') && player1.y < wallBottom.x) {
-        player1.y += 12;
+        player1.y += height * 0.03;
     }
 
     if (kb.pressing('i') && player2.y > wallTop.y) {
-        player2.y -= 12;
+        player2.y -= height * 0.03;
     } else if (kb.pressing('k') && player2.y < wallBottom.x) {
-        player2.y += 12;
+        player2.y += height * 0.03;
     }
 
-    //changes direction depending on what side of the border it went out
-    if (ball.x < -100) {
-        //makes the ball go to the right
+    if (ball.x < -width * 0.1) {
         ball.direction = 0;
         score2 += 1;
         scoreSound.play();
-    } else if (ball.x > width + 100) {
-        //Makes the ball go to the left
+    } else if (ball.x > width + width * 0.1) {
         ball.direction = 180;
         score1 += 1;
         scoreSound.play();
     }
 
-
-    //puts back the ball in the middle when out of the border
-    if (ball.x < -100 || ball.x > width + 100) {
+    if (ball.x < -width * 0.1 || ball.x > width + width * 0.1) {
         ball.x = width / 2;
         ball.y = height / 2;
         ball.speed = speed;
     }
 
-    //winner scene aka score reset
     if (score1 == 5) {
         score1 = 0;
         score2 = 0;
@@ -212,36 +186,30 @@ function draw() {
         ball.speed = speed;
     }
 
-    // This code is just to make it more convenient when switched from page to page
     if (ellipseStartR > 0) {
         fill("red");
         ellipse(width / 2, height / 2, ellipseStartR);
-        ellipseStartR -= 10;
+        ellipseStartR -= fadeSpeed;
 
         // If the circle is fully drawn, show the button
         if (ellipseStartR <= 0) {
             backButton.show();
         }
     }
-
 }
-
-
-
 
 function goBack() {
     backButton.hide();
-    if (ellipseEndR < 1920) {
-        background(220); // Clear the canvas on each frame
+    if (ellipseEndR < width) {
+
         fill("red");
         ellipse(width / 2, height / 2, ellipseEndR);
         ellipseEndR += 10;
-        requestAnimationFrame(goBack); // Call the function again on the next frame
+        requestAnimationFrame(goBack);
     } else {
         window.location.href = "../../index.html";
     }
 }
-
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);

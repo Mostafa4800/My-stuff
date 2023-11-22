@@ -1,8 +1,89 @@
-html, body {
-  margin: 0;
-  padding: 0;
+html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'I hate Comic Sans', sans-serif;
+}
+
+body {
+    display: grid;
+    grid-auto-flow: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.page {
+    display: grid;
+    place-items: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 100vw;
+    transition: all .5s .5s ease-in-out;
+}
+
+.show {
+    left: 0;
+    transition: all .5s ease-in-out;
+}
+
+.menuitem {
+    display: grid;
+    place-items: center;
+    border: 7px solid #067084;
+    cursor: pointer;
+}
+
+.menu {
+    position: fixed;
+    height: 10vh;
+    background-color: red;
+    width: 100vw;
+    bottom: 0;
+    color: black;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.h1 {
+    position: absolute;
+    font-size: larger;
+    left: 2vw;
+}
+
+.p {
+    position: absolute;
+    font-size: x-large;
+    left: 7vw;
+    top: 20vh;
+    width: 60vw;
+}
+
+#bg1 {
+    position: absolute;
+    max-width: 100%;
+}
+
+#img1 {
+    position: absolute;
+    max-width: 25%;
+    top: 10%;
+    right: 3%;
+}
+
+#page1 {
+    background-image: url('https://cdn.discordapp.com/attachments/794619660078940215/1176874773465284648/image.png?ex=6570750b&is=655e000b&hm=1d34b3a96bb0fac33917fb1a8bc7d223715128bba799d49a27033626cbde0ab5&');
+    background-repeat: no-repeat;
+    background-position: center absolute;
+    background-size: 100vw 90vh;
+}
+
+#page2 {
+    background-color: #067084;
 }
 
 canvas {
-  display: block;
+    display: block;
 }
