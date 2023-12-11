@@ -2,6 +2,7 @@ let ellipseStartR = 1920;
 let ellipseEndR = 0;
 let backButton;
 let CurrentPage = "#page1"
+let bgTransparent = 255
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -17,7 +18,6 @@ function setup() {
     select("#item1").mouseClicked(() => switchPage("#page1"));
     select("#item2").mouseClicked(() => switchPage("#page2"));
     select("#item3").mouseClicked(() => switchPage("#page3"));
-    select("#item4").mouseClicked(() => switchPage("#page4"));
 }
 
 function switchPage(whichPage) {
@@ -40,7 +40,7 @@ function goBack() {
 }
 
 function draw() {
-    background(220);
+   background(255)
     // This code is just to make it more convenient when switched from page to page
     if (ellipseStartR > 0) {
         fill("red");
@@ -48,8 +48,9 @@ function draw() {
         ellipseStartR -= 10;
 
         // If the circle is fully drawn, show the button
-        if (ellipseStartR <= 0) {
+        if (ellipseStartR <= -1) {
             backButton.show();
+          
         }
     }
 }
@@ -57,4 +58,3 @@ function draw() {
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
-b

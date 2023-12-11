@@ -47,12 +47,11 @@
         background-repeat: no-repeat;
         background-size: 96vw 100vh;
     }
-    
+  
     canvas {
-        position: absolute;
-        display: block;
+        left:100vh
     }
-    
+   
     .menu {
         position: fixed;
         height: 100vh;
