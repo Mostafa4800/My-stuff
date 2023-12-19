@@ -299,8 +299,6 @@ blockquote {
     background: url("../images/bg-image-1.jpg") 50% 0px no-repeat;
 }
 
-.bg-image-2 {}
-
 .caption-data {
     position: absolute;
     top: 50%;
@@ -438,8 +436,6 @@ button.cta-button:hover {
 .hero-caption h2 {
     text-align: center;
 }
-
-.hero-caption p {}
 
 
 /* Template Components
