@@ -4,11 +4,17 @@ let connection
     //info er en tekst variabel til at vise info på skærmen
 let info = "String som bruges til at vise info på skærmen"
     //sensorData indeholder de data vi får fra M5'eren
+
+//osc variables
 let sensorData = 20
+
+let osc, playing, freq, amp;
 
 function setup() {
     //sæt info tekstboksen ind i HTML
-    createCanvas(400, 400)
+    let cnv = createCanvas(400, 400);
+    cnv.mousePressed(playOscillator);
+    osc = new p5.Oscillator('sine');
 
     //lav en div til infoteksten
     infoDiv = createDiv(info)
@@ -29,6 +35,7 @@ function setup() {
     connection.on("message", (topic, ms) => {
         infoDiv.html("Modtager data: " + ms + " - på emne: " + topic)
         sensorData = ms.toString()
+        freq = map(sensorData, -180, 180, 0, 24000)
     })
 }
 
@@ -37,4 +44,14 @@ function draw() {
     fill("black")
     background(220)
     ellipse(width / 2, height / 2, sensorData)
+}
+
+function playOscillator() {
+    // starting an oscillator on a user gesture will enable audio
+    // in browsers that have a strict autoplay policy.
+    // See also: userStartAudio();
+    osc.start();
+    osc.amp(amp, 0.1)
+    osc.freq(freq, freq)
+    playing = true;
 }
