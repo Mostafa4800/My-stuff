@@ -8,7 +8,7 @@ let sensorData = 20
 
 function setup() {
     //sæt info tekstboksen ind i HTML
-    createCanvas(windowHeight, windowWidth)
+    createCanvas(400, 400)
     background(220)
         //lav en div til infoteksten
     infoDiv = createDiv(info)
@@ -23,7 +23,7 @@ function setup() {
     })
 
     //vi abonnerer på et emne - her "current"
-    connection.subscribe('current')
+    connection.subscribe('so-case-2t')
         //hver gang vi får en besked på emnet "current"  
     connection.on("message", (topic, ms) => {
         infoDiv.html("Modtager data: " + ms + " - på emne: " + topic)
