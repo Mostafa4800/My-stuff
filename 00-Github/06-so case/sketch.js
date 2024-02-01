@@ -9,8 +9,8 @@ let sensorData = 20
 function setup() {
     //sæt info tekstboksen ind i HTML
     createCanvas(400, 400)
-    background(220)
-        //lav en div til infoteksten
+
+    //lav en div til infoteksten
     infoDiv = createDiv(info)
         //sæt den nederst på canvas
     infoDiv.position(20, height - 40)
@@ -20,6 +20,7 @@ function setup() {
     connection.on("connect", (m) => {
         //vis i inforteksten at der er forbindelse 
         infoDiv.html("Er nu forbundet til Next's MQTT server")
+
     })
 
     //vi abonnerer på et emne - her "current"
@@ -27,7 +28,13 @@ function setup() {
         //hver gang vi får en besked på emnet "current"  
     connection.on("message", (topic, ms) => {
         infoDiv.html("Modtager data: " + ms + " - på emne: " + topic)
+        sensorData = ms.toString()
     })
 }
 
-function draw() {}
+function draw() {
+    background(220)
+    fill("black")
+    background(220)
+    ellipse(width / 2, height / 2, sensorData)
+}
