@@ -4,10 +4,17 @@ let loggedIn = false;
 let loginButton, signupButton;
 let usernameInput, passwordInput;
 let message = "";
+let backgroundImg;
+
+function preload() {
+    backgroundImg = loadImage("back1.png");
+}
 
 function setup() {
-    //makes sure that the size of the windowwidth and height utilizes your whole screen
+    textFont('Courier New')
+        //makes sure that the size of the windowwidth and height utilizes your whole screen
     createCanvas(windowWidth, windowHeight);
+
 
     // Create login and signup buttons
     loginButton = createButton('Login');
@@ -27,11 +34,15 @@ function setup() {
 }
 
 function draw() {
+    textFont('Courier New')
 
-    //timeer
+    //timer
     time = nf(hour(), 2) + ":" + nf(minute(), 2) + ":" + nf(second(), 2);
     //draws a background
     background(220);
+
+    // Draw the background image
+    image(backgroundImg, 0, 0, width, height);
 
     textAlign(CENTER, CENTER);
     fill(0);
@@ -40,14 +51,27 @@ function draw() {
     text(message, width / 2, height / 2 - 80);
 
 
+
     //checks if the user is logged in
     if (!loggedIn) {
         textSize(20);
+        fill("black")
         text("Login or Sign Up", width / 2, height / 2 - 60);
-        text("Time: " + time, width / 2, height / 4);
+        //timer text
+        fill(225, 112, 85, 180)
+        textSize(80)
+        text(time, width / 2, height / 8);
     } else {
+        fill(225, 112, 85, 180)
         textSize(20);
-        text("Logged in as: " + acc[0].name, width / 2, height / 2 - 30);
+        textAlign(RIGHT, TOP)
+        text(time, windowWidth, 0);
+        textAlign(LEFT, TOP)
+        text("Logged in as: " + usernameInput.value(), 0, 0);
+        usernameInput.hide();
+        passwordInput.hide();
+        loginButton.hide();
+        signupButton.hide();
     }
 
 
@@ -56,8 +80,6 @@ function draw() {
     passwordInput.position(width / 2 - 100, height / 2)
     loginButton.position(width / 2 - 60, height / 2 + 40);
     signupButton.position(width / 2 + 0, height / 2 + 40);
-
-
 }
 
 function hashPassword(password) {
@@ -99,9 +121,13 @@ function signUp() {
     if (!acc.find(user => user.name === enteredUsername)) {
         storeUserData(enteredUsername, enteredPassword);
         loggedIn = true;
-        message = ` Door Successfully signed up and logged in as ${enteredUsername}!`;
+
+        message = `Successfully signed up and logged in as ${enteredUsername}!`;
+
+        setTimeout(message = ``, 1000)
     } else {
         loggedIn = false;
+
         message = "Username already exists. Please choose a different username.";
     }
     // Log acc data to console

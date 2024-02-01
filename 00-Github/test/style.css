@@ -1,0 +1,198 @@
+body {
+    margin: 0;
+    font-family: 'Courier New', monospace;
+}
+
+#navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    height: 50px;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+#loggedInMessage {
+    font-size: 16px;
+    text-align: left;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    /* Adjust margin as needed */
+}
+
+#time {
+    font-size: 16px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#backgroundContainer {
+    background-image: url('back1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: calc(100vh - 40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+#loginContainer,
+#loggedInContainer {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    /* Center the container */
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.button-group {
+    margin-top: 15px;
+}
+
+button {
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #4caf50;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+}
+
+button:first-child {
+    margin-right: 10px;
+}
+
+input {
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333333;
+}
+
+#fullScreenMessage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+
+/* Responsive Styles */
+
+@media only screen and (max-width: 600px) {
+    #loggedInContainer,
+    #loginContainer {
+        max-width: 80%;
+        /* Adjust as needed */
+    }
+}
+
+#navbarDropdown {
+    display: none;
+}
+
+#navbarOptions {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #333;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+#navbarOptions button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    text-decoration: none;
+}
+
+
+/* Add the .loggedIn class to show #navbarDropdown when logged in */
+
+.loggedIn #navbarDropdown {
+    position: relative;
+    display: inline-block;
+    display: flex;
+    align-items: center;
+}
+
+.banner {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    /* Adjust the margin as needed */
+}
+
+.song-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+.song-details {
+    margin-top: 10px;
+    /* Adjust the margin as needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.song-details audio {
+    margin-top: 10px;
+    /* Adjust the margin as needed */
+}
+
+.song-details p {
+    margin: 0;
+}
+
+.song-details button {
+    margin-top: 10px;
+    /* Adjust the margin as needed */
+}
