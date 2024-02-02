@@ -13,7 +13,6 @@ const musicLibrary = [{
         audioFile: "assets/Viva la Vida.mp3",
         banner: "assets/Viva la Vida.jpeg"
     },
-    // Add more songs as needed
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -213,7 +212,7 @@ function clearMessage() {
 }
 
 
-// Modify hashPassword function
+// random hashing program i found in stack overflow
 function hashPassword(password) {
     const encoder = new TextEncoder();
     const data = encoder.encode(password);
@@ -225,7 +224,7 @@ function hashPassword(password) {
         });
 }
 
-// Modify storeUserData function
+// random hashing program i found in stack overflow
 function storeUserData(name, password) {
     // Hash the password using SHA-256
     return hashPassword(password)
@@ -270,7 +269,7 @@ function logout() {
 }
 
 function deleteAccount() {
-    // Your delete account logic here
+    // delete account logic 
     const userIndex = acc.findIndex(user => user.name === loggedInUser);
     if (userIndex !== -1) {
         acc.splice(userIndex, 1);
