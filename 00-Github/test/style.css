@@ -22,7 +22,6 @@ body {
     margin-left: 10px;
     display: flex;
     align-items: center;
-    /* Adjust margin as needed */
 }
 
 #time {
@@ -115,17 +114,6 @@ h1 {
     font-size: 24px;
 }
 
-
-/* Responsive Styles */
-
-@media only screen and (max-width: 600px) {
-    #loggedInContainer,
-    #loginContainer {
-        max-width: 80%;
-        /* Adjust as needed */
-    }
-}
-
 #navbarDropdown {
     display: none;
 }
@@ -165,7 +153,6 @@ h1 {
     max-width: 100%;
     height: auto;
     margin-bottom: 10px;
-    /* Adjust the margin as needed */
 }
 
 .song-container {
@@ -177,7 +164,6 @@ h1 {
 
 .song-details {
     margin-top: 10px;
-    /* Adjust the margin as needed */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -185,7 +171,6 @@ h1 {
 
 .song-details audio {
     margin-top: 10px;
-    /* Adjust the margin as needed */
 }
 
 .song-details p {
@@ -194,5 +179,14 @@ h1 {
 
 .song-details button {
     margin-top: 10px;
-    /* Adjust the margin as needed */
+}
+
+
+/* Responsive Styles */
+
+@media only screen and (max-width: 600px) {
+    #loggedInContainer,
+    #loginContainer {
+        max-width: 80%;
+    }
 }
