@@ -128,7 +128,7 @@ function checkLogin() {
                     clearLoginErrors(); // Clear login errors
                     // Display the success message in a full-screen overlay
                     showFullScreenMessage(`Successfully logged in as ${enteredUsername}!`);
-                    // Set a timer to clear the message and hide overlay after 3 seconds (adjust as needed)
+                    // Set a timer to clear the message and hide overlay after 3 seconds
                     setTimeout(hideFullScreenMessage, 3000);
                     console.log(acc);
                 } else {
