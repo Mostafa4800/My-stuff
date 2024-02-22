@@ -1,5 +1,6 @@
 let idle = [];
-let iid = 0
+let iid = 0;
+let currentFrame = 0;
 let imgWidth = 480; // Set the image width
 let imgHeight = 640; // Set the image height
 
@@ -27,15 +28,15 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
 
-
 function AnimationIdle(){
-  if (iid == idle.length) {
-    iid = 0;
-  }
-
   // Draw the image at the center of the canvas
   let x = (windowWidth - imgWidth) / 2;
   let y = windowHeight - imgHeight+20;
-  image(idle[iid], x, y, imgWidth, imgHeight);
-  iid++;
+  image(idle[currentFrame], x, y, imgWidth, imgHeight);
+  
+  // Increment the current frame only when the image is being displayed
+  currentFrame++;
+  if (currentFrame == idle.length) {
+    currentFrame = 0;
+  }
 }
