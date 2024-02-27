@@ -1,0 +1,76 @@
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        display: grid;
+        grid-auto-flow: column;
+    }
+    
+    body {
+        display: grid;
+        grid-auto-flow: column;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+    }
+    
+    .page {
+        display: grid;
+        place-items: center;
+        height: 100vh;
+        width: 100vw;
+        position: fixed;
+        left: 100vw;
+        transition: all 0.5s 0.5s ease-in-out;
+    }
+    
+    .show {
+        left: 0;
+        transition: all 0.5s ease-in-out;
+    }
+    
+    #page1 {
+        background-image: url('https://i.kym-cdn.com/photos/images/facebook/002/238/268/59b.jpg');
+        background-repeat: no-repeat;
+        background-size: 96vw 100vh;
+    }
+    
+    #page2 {
+        background-image: url('https://i.ytimg.com/vi/rNz6AZ91r1M/maxresdefault.jpg');
+        background-repeat: no-repeat;
+        background-size: 96vw 100vh;
+    }
+    
+    #page3 {
+        background-image: url('https://media.discordapp.net/attachments/906718996357861386/1179415026499600396/remember-shes-defrosting-so-get-as-many-as-you-can-before-v0-oj0o1tti8zz91.png?ex=6579b2d6&is=65673dd6&hm=642a11ae313d0e3ca8d3b92af8ab1a11cee39dd13fe54e6b550551b7d6111a0f&=&format=webp&width=743&height=491');
+        background-repeat: no-repeat;
+        background-size: 96vw 100vh;
+    }
+  
+    canvas {
+        left:100vh
+    }
+   
+    .menu {
+        position: fixed;
+        height: 100vh;
+        background-color: #487758;
+        width: 4vw;
+        bottom: 0;
+        color: white;
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        right: 0;
+    }
+    
+    .menuitem {
+        display: grid;
+        place-items: center;
+        border: 3px solid #C53747;
+        cursor: pointer;
+    }
+    
+    #back {
+        position: absolute;
+    }
