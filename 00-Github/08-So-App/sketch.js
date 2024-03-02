@@ -95,6 +95,7 @@ function setup() {
 
 function draw() {
   // Call the appropriate animation function based on the current animation mode
+  if (!homeMenu || navShowing){
   if (m == 0) {
     AnimationIdle();
   } else if (m == 7) {
@@ -110,7 +111,7 @@ function draw() {
   } else {
     return;
   }
-
+  }
   //if homemenu is true it shows the menu else it show the game
   if (homeMenu) {
     fill("black");
@@ -263,19 +264,24 @@ function displayGameFinishedScreen() {
     resetGame();
     playAgainButton.hide();
     homeButton.hide();
+    background(220)
   });
 
   let homeButton = createButton("Home");
   homeButton.size(150, 50);
   homeButton.position(windowWidth / 2 - 75, windowHeight * 0.5);
   homeButton.mousePressed(() => {
+    let gameFinishedElements = selectAll("button");
+    for (let i = 0; i < gameFinishedElements.length; i++) {
+      gameFinishedElements[i].hide();
+    }
     // Go back to home menu
     homeMenu = true;
     navShowing = false;
     m = 0; // Reset animation mode
-    playAgainButton.hide();
-    homeButton.hide();
+
   });
+  background(220)
 }
 
 // Function to reset the game state
