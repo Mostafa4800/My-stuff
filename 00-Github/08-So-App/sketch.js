@@ -1,82 +1,97 @@
-// Initialize empty arrays to store idle, transition 1, transition 2, transition 3, transition 4, transition 6, and transition 7 animation frames
+// Initialize empty arrays to store idle, screamIdle, transition animations
 let idle = [];
 let screamIdle = [];
-let trans = []; // Array to store transition animation frames
-let transIndex = []; // Array to store indexes for transition animations
-let transTotalFrames = [22, 3, 3, 15, 9, 6, 117]; // Array to store the total number of frames for each transition
-
-// Initialize variables to keep track of the current frame and image index
-let iil1 = 0;
-let iil2 = 0;
-let iil3 = 0;
-let iil4 = 0;
-let iil5 = 0;
-let iil6 = 0;
-let iil7 = 0;
+let trans = [];
+let transIndex = [];
 let currentFrame = 0;
+let animationIndexes = {
+  idle: 0,
+  screamIdle: 0,
+  transitions: Array(7).fill(0)
+};
+let animationMode = 0;
+const transTotalFrames = [22, 3, 3, 15, 9, 6, 117];
 
-// Set the width and height of the images
+// Set image width and height
 let imgWidth = 480;
 let imgHeight = 640;
 
-// Initialize a variable to keep track of the current animation mode
-let m = 0;
-
-//balo font
+// Initialize variables for font, buttons, navigation, sensor data, time, and cooldown duration
 let balo;
-
 let homeMenu = true;
 let navShowing = false;
-
-//buttons
 let startButton;
-
 let navButton;
+let sensorData;
+let time = 0;
+const cooldownDuration = 5000;
 
 // Navigation options
-let homeDataOptions = ["Home", "Data"]; // Sample options for home data
+let homeDataOptions = ["Home", "Data"];
 
+// Define total number of stages in the game
+const totalStages = 8;
+let progressBarWidth;
+
+// Initialize frequency count object
+let frequencyCounts = {
+  "500": 0,
+  "600": 0,
+  "700": 0,
+  "800": 0,
+  "900": 0,
+  "1000+": 0
+};
+
+// Preload function
 function preload() {
   balo = loadFont("Assets/BalooBhaina-Regular.ttf");
 
-  // Preload idle animation frames
   let idleImages = 25;
   for (let i = 0; i < idleImages; i++) {
     let path = 'Assets/Idle/idle' + (i + 1) + '.PNG';
-    let loaded_image = loadImage(path);
-    idle.push(loaded_image); // Add the loaded image to the idle array
+    idle.push(loadImage(path));
   }
 
-  // Preload transition animation frames
   for (let j = 1; j <= 7; j++) {
-    let frames = []; // Create an empty array to store frames for each transition
+    let frames = [];
     for (let i = 0; i < transTotalFrames[j - 1]; i++) {
       let path = 'Assets/Trans' + j + '/' + (i + 1) + '.PNG';
-      let loaded_image = loadImage(path);
-      frames.push(loaded_image); // Add the loaded image to the frames array
+      frames.push(loadImage(path));
     }
-    trans.push(frames); // Add the frames array to the trans array
-    transIndex.push(0); // Initialize index for each transition
+    trans.push(frames);
+    transIndex.push(0);
   }
 
   let idleScreamImages = 6;
   for (let i = 0; i < idleScreamImages; i++) {
     let path = 'Assets/screamIdle/' + (i + 1) + '.PNG';
-    let loaded_image = loadImage(path);
-    screamIdle.push(loaded_image); // Add the loaded image to the idle2 array
+    screamIdle.push(loadImage(path));
   }
 
   navImg = loadImage("Assets/list.png");
 }
 
+// Setup function
 function setup() {
-  // Create the canvas with the size of the window
   createCanvas(windowWidth, windowHeight);
-  // Set the frame rate to 20 frames per second
   frameRate(20);
 
-  //Start Button
+  // MQTT connection setup
+  let connection = mqtt.connect("wss://mqtt.nextservices.dk");
+  connection.on("connect", () => {
+    console.log("Connected to Next's MQTT server");
+    connection.subscribe('iHateLife');
+    connection.on("message", (topic, ms) => {
+      console.log("Received data: " + ms + " - on topic: " + topic); 
+      sensorData = parseInt(ms.toString());
+      if (!isNaN(sensorData)) {
+        updateFrequencyCounts(sensorData);
+      }
+    });
+  });
 
+  // Start button setup
   startButton = createButton("START GAME");
   startButton.size(220, 65);
   startButton.style("color:black");
@@ -86,33 +101,40 @@ function setup() {
   startButton.style("border-radius", "27px");
   startButton.hide();
 
-  // Initialize navigation button
+  // Navigation button setup
   navButton = createImg("Assets/list.png");
   navButton.size(40, 40);
   navButton.position(10, 10);
-  navButton.mousePressed(toggleNav); // Call toggleNav function when clicked
+  navButton.mousePressed(toggleNav);
+
+  // Calculate width of progress bar segment
+  progressBarWidth = windowWidth / totalStages;
 }
 
+// Draw function
 function draw() {
-  // Call the appropriate animation function based on the current animation mode
-  if (!homeMenu || navShowing){
-  if (m == 0) {
-    AnimationIdle();
-  } else if (m == 7) {
-    AnimationScreamIdle();
-  } else if (m >= 1 && m <= 6) {
-    AnimationTransition(m);
-  } else if (m == 8) {
-    AnimationTransition(m);
-        // Check if transition 7 has ended
-        if (transIndex[6] >= transTotalFrames[6]) {
-          displayGameFinishedScreen(); // Display game finished screen
+  if (!homeMenu || navShowing) {
+    switch (animationMode) {
+      case 0:
+        AnimationIdle();
+        break;
+      case 7:
+        AnimationScreamIdle();
+        break;
+      case 8:
+        AnimationTransition(animationMode);
+        if (animationIndexes.transitions[6] >= transTotalFrames[6]) {
+          displayGameFinishedScreen();
         }
-  } else {
-    return;
+        break;
+      default:
+        if (animationMode >= 1 && animationMode <= 6) {
+          AnimationTransition(animationMode);
+        }
+        break;
+    }
   }
-  }
-  //if homemenu is true it shows the menu else it show the game
+
   if (homeMenu) {
     fill("black");
     textSize(30);
@@ -125,128 +147,166 @@ function draw() {
       homeMenu = !homeMenu;
       startButton.hide();
     });
-
   }
 
-  // Show navigation options if nav is showing
   if (navShowing && !homeMenu) {
     displayNavOptions();
   }
+  applyButtonStyling();
+
+  // Draw progress bar only when not in home menu and game is ongoing
+  if (!homeMenu && animationMode !== 0 && animationMode !== 8) {
+    drawProgressBar();
+  }
+
+  // Draw the pie chart if data is available
+  if (Object.values(frequencyCounts).reduce((a, b) => a + b, 0) > 0) {
+    drawPieChart();
+  }
 }
 
+// Window resize function
 function windowResized() {
-  // Resize the canvas to match the window size
   resizeCanvas(windowWidth, windowHeight);
 }
 
+// Mouse pressed function
 function mousePressed() {
-  if(!homeMenu || !navShowing){
-  // Increment the animation mode when the mouse is clicked
-  m = (m + 1) % 9; // Wrap around animation mode
-
-  // Reset transition indexes when transitioning back to idle animation
-  if (m == 1) {
-    for (let i = 0; i < transIndex.length; i++) {
-      transIndex[i] = 0;
+  if (!homeMenu || !navShowing) {
+    animationMode = (animationMode + 1) % 9;
+    if (animationMode == 1) {
+      for (let i = 0; i < transIndex.length; i++) {
+        transIndex[i] = 0;
+      }
     }
   }
 }
+
+// Function to draw the progress bar
+function drawProgressBar() {
+  // Calculate current progress based on animationMode
+  let currentProgress = map(animationMode, 1, totalStages, 0, windowWidth);
+  
+  // Draw background of progress bar
+  fill(200);
+  rect(0, 0, windowWidth, 20);
+
+  // Draw filled portion of progress bar
+  fill(0, 255, 0);
+  rect(0, 0, currentProgress, 20);
+
+  // Draw outline of progress bar
+  noFill();
+  stroke(0);
+  rect(0, 0, windowWidth, 20);
 }
 
-// Animation function for idle animation
+// AnimationIdle function
 function AnimationIdle() {
-  // Set the background color
   background(220);
-
-  // Calculate the x and y coordinates to center the image on the canvas
   let x = (windowWidth - imgWidth) / 2;
   let y = windowHeight - imgHeight + 20;
-
-  // Draw the current idle animation frame
   image(idle[currentFrame], x, y, imgWidth, imgHeight);
-
-  // Increment the current frame and reset to 0 when it reaches the end
   currentFrame++;
   if (currentFrame == idle.length) {
     currentFrame = 0;
   }
 }
 
+// AnimationScreamIdle function
 function AnimationScreamIdle() {
-  // Set the background color
   background(220);
-
-  // Calculate the x and y coordinates to center the image on the canvas
   let x = (windowWidth - imgWidth) / 2;
   let y = windowHeight - imgHeight + 20;
-
-  // Draw the current idle animation frame
-  image(screamIdle[iil7], x, y, imgWidth, imgHeight);
-
-  // Increment the current frame and reset to 0 when it reaches the end
-  iil7++;
-  if (iil7 == screamIdle.length) {
-    iil7 = 0;
+  image(screamIdle[animationIndexes.screamIdle], x, y, imgWidth, imgHeight);
+  animationIndexes.screamIdle++;
+  if (animationIndexes.screamIdle == screamIdle.length) {
+    animationIndexes.screamIdle = 0;
   }
 }
 
-// Animation function for transition animations
+// AnimationTransition function
 function AnimationTransition(index) {
-  // Calculate the x and y coordinates to center the image on the canvas
   let x = (windowWidth - imgWidth) / 2;
   let y = windowHeight - imgHeight + 20;
-
-  if (index === 8) { // Handle transition 7
-    let frames = trans[6]; // Get frames for transition 7 (index 6 in the trans array)
-    let frameIndex = transIndex[6]; // Get frame index for transition 7
+  if (index === 8) {
+    let frames = trans[6];
+    let frameIndex = animationIndexes.transitions[6];
     if (frameIndex < frames.length) {
       background(220);
       image(frames[frameIndex], x, y, imgWidth, imgHeight);
-      transIndex[6]++; // Increment the frame index for transition 7
+      animationIndexes.transitions[6]++;
     }
   } else {
     let frames = trans[index - 1];
-    let frameIndex = transIndex[index - 1];
-
-    // Increment the current frame and reset to 0 when it reaches the end
+    let frameIndex = animationIndexes.transitions[index - 1];
     if (frameIndex < frames.length) {
       background(220);
-      // Draw the current transition animation frame
       image(frames[frameIndex], x, y, imgWidth, imgHeight);
-      transIndex[index - 1]++; // Increment the frame index
+      animationIndexes.transitions[index - 1]++;
     }
   }
 }
 
+// Toggle navigation function
 function toggleNav() {
-  if(!navShowing){
-  navShowing = !navShowing;
-
-  // Hide menu and start button if nav is showing
-  if (navShowing && homeMenu) {
-    homeMenu = false;
-    startButton.hide();
+  if (!navShowing) {
+    navShowing = !navShowing;
+    if (navShowing && homeMenu) {
+      homeMenu = false;
+      startButton.hide();
+    }
   }
 }
-}
 
-// Function to display navigation options
+
+
+// Display navigation options function
 function displayNavOptions() {
-  background(220);
+  clearCanvas(); // Clear the canvas
   fill("black");
   textSize(30);
   textAlign(CENTER);
   textFont(balo);
-  text("Navigation Options", windowWidth / 2, windowHeight * 0.1);
 
-  // Display options
   for (let i = 0; i < homeDataOptions.length; i++) {
     let option = homeDataOptions[i];
-    text(option, windowWidth / 2, (windowHeight * 0.2) + (i * 50));
+    let button = createButton(option);
+    text("Navigation Options", windowWidth / 2, windowHeight * 0.1);
+    button.size(150, 50);
+    button.position(windowWidth / 2 - 110, (windowHeight * 0.2) + (i * 70) + 20);
+    button.mousePressed(() => {
+background(220)
+
+      if (option === "Home") {
+        homeMenu = true;
+        navShowing = false;
+        animationMode = 0;
+        // Hide navigation buttons and show start button again when returning to home screen
+        toggleNavButtons(false);
+        startButton.show();
+      } else if (option === "Data") {
+        drawPieChart(); // Display the pie chart
+      }
+    });
   }
 }
 
-// Function to display the game finished screen with options
+// Function to toggle navigation buttons visibility
+function toggleNavButtons(visible) {
+  let navButtons = selectAll("button");
+  for (let i = 0; i < navButtons.length; i++) {
+    if (navButtons[i] !== startButton.elt) {
+      if (visible) {
+        navButtons[i].show();
+      } else {
+        navButtons[i].hide();
+      }
+    }
+  }
+}
+
+// Display game finished screen function
 function displayGameFinishedScreen() {
   background(220);
   fill("black");
@@ -254,53 +314,113 @@ function displayGameFinishedScreen() {
   textAlign(CENTER);
   textFont(balo);
   text("Game Finished", windowWidth / 2, windowHeight * 0.1);
-
-  // Display options
   let playAgainButton = createButton("Play Again");
   playAgainButton.size(150, 50);
-  playAgainButton.position(windowWidth / 2 - 75, windowHeight * 0.4);
+  playAgainButton.position(windowWidth / 2 - 110, windowHeight * 0.4);
   playAgainButton.mousePressed(() => {
-    // Reset game state and start again
     resetGame();
     playAgainButton.hide();
     homeButton.hide();
     background(220)
   });
-
   let homeButton = createButton("Home");
   homeButton.size(150, 50);
-  homeButton.position(windowWidth / 2 - 75, windowHeight * 0.5);
+  homeButton.position(windowWidth / 2 - 110, windowHeight * 0.5);
   homeButton.mousePressed(() => {
     let gameFinishedElements = selectAll("button");
     for (let i = 0; i < gameFinishedElements.length; i++) {
       gameFinishedElements[i].hide();
     }
-    // Go back to home menu
     homeMenu = true;
     navShowing = false;
-    m = 0; // Reset animation mode
-
+    animationMode = 0;
   });
   background(220)
 }
 
-// Function to reset the game state
+// Reset game function
 function resetGame() {
-  // Reset variables, animation mode, etc. as needed
-
-  // Reset transition indexes
   for (let i = 0; i < transIndex.length; i++) {
     transIndex[i] = 0;
   }
-
-  // Reset any other variables you need to reset
   currentFrame = 0;
-  iil7 = 0;
-  m = 0; // Set animation mode to idle
-
-  // Hide the game finished screen elements if any
+  animationIndexes.screamIdle = 0;
+  animationMode = 0;
   let gameFinishedElements = selectAll("button");
   for (let i = 0; i < gameFinishedElements.length; i++) {
     gameFinishedElements[i].remove();
+  }
+}
+
+// Cooldown function
+function cooldown() {
+  const currentTime = Date.now();
+  if (currentTime - time >= cooldownDuration && animationMode < 5) {
+    animationMode++;
+    time = currentTime;
+  } else {
+    console.log("Cooldown in progress");
+  }
+}
+
+// Apply styling to all buttons on the page
+function applyButtonStyling() {
+  let buttons = selectAll("button");
+  for (let i = 0; i < buttons.length; i++) {
+    styleButton(buttons[i]);
+  }
+}
+
+// Function to style buttons
+function styleButton(button) {
+  button.size(220, 65);
+  button.style("color:black");
+  button.style("border-width:4px");
+  button.style("font-family", "Baloo Bhaina");
+  button.style("font-size", "30px");
+  button.style("border-radius", "27px");
+}
+
+// Function to update frequency counts
+function updateFrequencyCounts(frequency) {
+  if (frequency >= 500 && frequency <= 900) {
+    // Increment corresponding frequency count
+    let key = Math.floor(frequency / 100) * 100 + "";
+    frequencyCounts[key]++;
+  } else if (frequency > 900) {
+    frequencyCounts["1000+"]++;
+  }
+}
+
+// Function to draw the pie chart
+function drawPieChart() {
+  let total = Object.values(frequencyCounts).reduce((a, b) => a + b, 0);
+  let angles = [];
+  let colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#00FFFF', '#FF00FF'];
+  let labels = Object.keys(frequencyCounts);
+
+  // Calculate angles for each frequency category
+  for (let i = 0; i < labels.length; i++) {
+    angles.push(map(frequencyCounts[labels[i]], 0, total, 0, TWO_PI));
+  }
+
+  // Draw the pie chart
+  let lastAngle = 0;
+  for (let i = 0; i < angles.length; i++) {
+    fill(colors[i]);
+    stroke(0);
+    strokeWeight(1);
+    arc(windowWidth / 2, windowHeight / 2, 300, 300, lastAngle, lastAngle + angles[i]);
+    lastAngle += angles[i];
+  }
+
+  // Add legend
+  textSize(20);
+  textAlign(LEFT);
+  for (let i = 0; i < labels.length; i++) {
+    fill(colors[i]);
+    rect(windowWidth - 150, 50 + i * 30, 20, 20);
+    fill(0);
+    text(labels[i] + ": " + frequencyCounts[labels[i]], windowWidth - 120, 65 + i * 30);
   }
 }
