@@ -394,25 +394,40 @@ function styleButton(button) {
 }
 
 // Function to update frequency counts
+// This function takes in a frequency value as an argument
+// and updates the frequency counts object accordingly.
 function updateFrequencyCounts(frequency) {
+ 
+  // Check if the frequency is between 500 and 900 (inclusive)
   if (frequency >= 500 && frequency <= 900) {
-    // Increment corresponding frequency count
+    // If so, calculate the key for the frequencyCounts object
+    // by dividing the frequency by 100, rounding down to the nearest integer,
+    // multiplying it by 100 again, and converting the result to a string.
     let key = Math.floor(frequency / 100) * 100 + "";
+    
+    // Increment the corresponding frequency count in the frequencyCounts object
     frequencyCounts[key]++;
   } else if (frequency > 900) {
+    // If the frequency is greater than 900, increment the frequencyCounts object's
+    // "1000+" key, indicating that the frequency is above 900.
     frequencyCounts["1000+"]++;
   }
-}
+ }
 
 // Function to draw the pie chart
 function drawPieChart() {
+  // Calculate the total value of all frequency counts
   let total = Object.values(frequencyCounts).reduce((a, b) => a + b, 0);
+
+  // Initialize arrays for angles, colors, and labels
   let angles = [];
   let colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#00FFFF', '#FF00FF'];
   let labels = Object.keys(frequencyCounts);
 
   // Calculate angles for each frequency category
   for (let i = 0; i < labels.length; i++) {
+    // Use the 'map' function to normalize the frequency count between 0 and total
+    // and map it to the corresponding angle between 0 and 2PI (TWO_PI)
     angles.push(map(frequencyCounts[labels[i]], 0, total, 0, TWO_PI));
   }
 
