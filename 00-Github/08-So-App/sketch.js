@@ -33,6 +33,7 @@ let homeDataOptions = ["Home", "Data"];
 const totalStages = 8;
 let progressBarWidth;
 
+let pv = false;
 // Initialize frequency count object
 let frequencyCounts = {
   "500": 0,
@@ -70,6 +71,9 @@ function preload() {
   }
 
   navImg = loadImage("Assets/list.png");
+
+  let testFrequency = 650;
+  updateFrequencyCounts(testFrequency);
 }
 
 // Setup function
@@ -78,18 +82,20 @@ function setup() {
   frameRate(20);
 
   // MQTT connection setup
-  let connection = mqtt.connect("wss://mqtt.nextservices.dk");
+  connection = mqtt.connect("wss://mqtt.nextservices.dk")
   connection.on("connect", () => {
-    console.log("Connected to Next's MQTT server");
-    connection.subscribe('iHateLife');
-    connection.on("message", (topic, ms) => {
-      console.log("Received data: " + ms + " - on topic: " + topic); 
-      sensorData = parseInt(ms.toString());
-      if (!isNaN(sensorData)) {
-        updateFrequencyCounts(sensorData);
-      }
-    });
-  });
+    console.log("Er nu forbundet til Next's MQTT server")    
+  })
+  
+  
+connection.subscribe('iHateLife')
+connection.on("message", (topic, ms) => {
+  console.log("Modtager data: " + ms + " - på emnet: " + topic) 
+  sensorData = ms.toString()
+  if(sensorData > 600){
+    cooldown()
+  }
+})
 
   // Start button setup
   startButton = createButton("START GAME");
@@ -160,16 +166,20 @@ function draw() {
   }
 
   // Draw the pie chart if data is available
+
+  updateFrequencyCounts(sensorData)
+
   if (Object.values(frequencyCounts).reduce((a, b) => a + b, 0) > 0) {
     drawPieChart();
   }
+
 }
 
 // Window resize function
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
-
+/*
 // Mouse pressed function
 function mousePressed() {
   if (!homeMenu || !navShowing) {
@@ -181,6 +191,7 @@ function mousePressed() {
     }
   }
 }
+*/
 
 // Function to draw the progress bar
 function drawProgressBar() {
@@ -276,21 +287,22 @@ function displayNavOptions() {
     button.size(150, 50);
     button.position(windowWidth / 2 - 110, (windowHeight * 0.2) + (i * 70) + 20);
     button.mousePressed(() => {
-background(220)
+      background(220);
 
       if (option === "Home") {
         homeMenu = true;
         navShowing = false;
         animationMode = 0;
         // Hide navigation buttons and show start button again when returning to home screen
-        toggleNavButtons(false);
+        toggleNavButtons(true); // Change to true to show buttons
         startButton.show();
       } else if (option === "Data") {
-        drawPieChart(); // Display the pie chart
+        pv = !pv;
       }
     });
   }
 }
+
 
 // Function to toggle navigation buttons visibility
 function toggleNavButtons(visible) {
@@ -355,7 +367,7 @@ function resetGame() {
 // Cooldown function
 function cooldown() {
   const currentTime = Date.now();
-  if (currentTime - time >= cooldownDuration && animationMode < 5) {
+  if (currentTime - time >= cooldownDuration && animationMode < 9) {
     animationMode++;
     time = currentTime;
   } else {
@@ -404,6 +416,7 @@ function drawPieChart() {
     angles.push(map(frequencyCounts[labels[i]], 0, total, 0, TWO_PI));
   }
 
+  if (pv){
   // Draw the pie chart
   let lastAngle = 0;
   for (let i = 0; i < angles.length; i++) {
@@ -413,6 +426,7 @@ function drawPieChart() {
     arc(windowWidth / 2, windowHeight / 2, 300, 300, lastAngle, lastAngle + angles[i]);
     lastAngle += angles[i];
   }
+}
 
   // Add legend
   textSize(20);
@@ -423,4 +437,8 @@ function drawPieChart() {
     fill(0);
     text(labels[i] + ": " + frequencyCounts[labels[i]], windowWidth - 120, 65 + i * 30);
   }
+}
+
+function clearCanvas(){
+  background(220)
 }
