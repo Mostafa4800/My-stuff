@@ -432,16 +432,18 @@ function drawPieChart() {
   }
 
   if (pv){
-  // Draw the pie chart
-  let lastAngle = 0;
-  for (let i = 0; i < angles.length; i++) {
-    fill(colors[i]);
-    stroke(0);
-    strokeWeight(1);
-    arc(windowWidth / 2, windowHeight / 2, 300, 300, lastAngle, lastAngle + angles[i]);
-    lastAngle += angles[i];
+    // Check if pv is truthy (non-empty, non-zero, non-null, etc.)
+    
+    // Draw the pie chart
+    let lastAngle = 0; // Initialize the last angle to 0
+    for (let i = 0; i < angles.length; i++) {
+      fill(colors[i]); // Set the fill color based on the color array
+      stroke(0); // Set the stroke color to black
+      strokeWeight(1); // Set the stroke weight to 1
+      arc(windowWidth / 2, windowHeight / 2, 300, 300, lastAngle, lastAngle + angles[i]); // Draw a section of the pie chart
+      lastAngle += angles[i]; // Update the last angle to the new ending angle for the next iteration
+    }
   }
-}
 
   // Add legend
   textSize(20);
