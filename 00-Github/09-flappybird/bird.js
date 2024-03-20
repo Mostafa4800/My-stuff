@@ -20,7 +20,15 @@ function Bird() {
 
   // Method to increase the bird's vertical velocity by the lift constant, simulating a jump
   this.up = function () {
+    if (this.velocity > -5){
+    this.velocity = 0;
     this.velocity += this.lift;
+    console.log(this.velocity)
+    console.log(1)
+    }else{
+        this.velocity += this.lift;
+        console.log(this.velocity)
+    }
   };
 
   // Method to update the bird's position and velocity based on the game's physics
