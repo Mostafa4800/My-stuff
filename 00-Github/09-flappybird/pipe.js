@@ -1,61 +1,52 @@
-// Pipe function creates a new pipe object with specific properties and methods
+// function for Pipe
 function Pipe() {
+    // Properties
+    this.spacing = 175; // Space between top and bottom pipes
+    this.top = random(height / 6, 3 / 4 * height); // Top y-coordinate of top pipe
+    this.bottom = height - (this.top + this.spacing); // Bottom y-coordinate of bottom pipe
+    this.x = width; // Initial x-coordinate of the pipe
+    this.w = 80; // Width of the pipe
+    this.speed = 10; // Speed of pipe movement
+    this.highlight = false; // Indicates if the pipe is highlighted
 
-    // The spacing property sets the space between the top and bottom pipes
-    this.spacing = 175;
-  
-    // The top property sets the top y-coordinate of the top pipe
-    this.top = random(height / 6, 3 / 4 * height);
-  
-    // The bottom property sets the bottom y-coordinate of the bottom pipe
-    this.bottom = height - (this.top + this.spacing);
-  
-    // The x property sets the initial x-coordinate of the pipe
-    this.x = width;
-  
-    // The w property sets the width of the pipe
-    this.w = 80;
-  
-    // The speed property sets the speed at which the pipe moves
-    this.speed = 10;
-  
-    // The highlight property indicates whether the pipe is highlighted or not
-    this.highlight = false;
-  
-    // The hits method checks if the bird hits the pipe
-    this.hits = function(bird) {
-      if (bird.y < this.top || bird.y > height - this.bottom) {
+// Check if the bird hits the pipe
+this.hits = function(bird) {  
+    // Check if the bird's y-coordinate is above the top of the pipe or below the bottom of the pipe
+    if (bird.y < this.top || bird.y > height - this.bottom) {
+        // Check if the bird's x-coordinate is within the horizontal range of the pipe
         if (bird.x > this.x && bird.x < this.x + this.w) {
-          this.highlight = true;
-          return true;
+            // If both conditions are met, it means the bird is inside the pipe
+            // Set this.highlight to true to highlight the pipe
+            this.highlight = true;
+            // Return true indicating the bird hit the pipe
+            return true;
         }
-      }
-      this.highlight = false;
-      return false;
     }
-  
-    // The show method draws the pipe on the canvas
+    // If the bird doesn't meet both conditions, it means it didn't hit the pipe
+    // Set this.highlight to false to remove any highlight
+    this.highlight = false;
+    // Return false indicating the bird didn't hit the pipe
+    return false;
+}
+
+
+    // Method: Draw the pipe on the canvas
     this.show = function() {
-      fill(255);
-      if (this.highlight) {
-        fill(255, 0, 0); // Change the color to red when highlighted
-      }
-      rect(this.x, 0, this.w, this.top); // Draw the top pipe
-      rect(this.x, height - this.bottom, this.w, this.bottom); // Draw the bottom pipe
+        fill(255);
+        if (this.highlight) {
+            fill(255, 0, 0); // Change color to red if highlighted
+        }
+        rect(this.x, 0, this.w, this.top); // Draw top pipe
+        rect(this.x, height - this.bottom, this.w, this.bottom); // Draw bottom pipe
     }
-  
-    // The update method updates the position of the pipe
+
+    // Method: Update the position of the pipe
     this.update = function() {
-      this.x -= this.speed;
+        this.x -= this.speed; // Move the pipe to the left
     }
-  
-    // The offscreen method checks if the pipe is offscreen
+
+    // Method: Check if the pipe is offscreen
     this.offscreen = function() {
-      if (this.x < -this.w) {
-        return true;
-      } else {
-        return false;
-      }
+        return this.x < -this.w; // Return true if pipe is offscreen
     }
-  
-  }
+}

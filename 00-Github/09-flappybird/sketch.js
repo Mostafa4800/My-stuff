@@ -1,6 +1,6 @@
-// Global variables
-var bird;
-var pipes = [];
+
+let bird;
+let pipes = [];
 
 // Initialize the canvas and create the bird and pipes arrays
 function setup() {
@@ -12,10 +12,10 @@ function setup() {
 // Main game loop
 function draw() {
   background(0); // Set the background color to black
-  frameRate(60)
+  frameRate(60);
 
   // Iterate through the pipes array in reverse order
-  for (var i = pipes.length-1; i >= 0; i--) {
+  for (let i = pipes.length - 1; i >= 0; i--) {
     pipes[i].show(); // Display the current pipe
     pipes[i].update(); // Update the current pipe's position
 
@@ -35,14 +35,14 @@ function draw() {
   bird.show();
 
   // Add a new pipe every 75 frames
-  if (frameCount % 75 == 0) {
+  if (frameCount % 75 === 0) {
     pipes.push(new Pipe());
   }
 }
 
 // Event handler for key presses
 function keyPressed() {
-  if (key == ' ') {
+  if (key === ' ') {
     bird.up(); // Call the bird's up() method when the spacebar is pressed
     //console.log("SPACE");
   }
