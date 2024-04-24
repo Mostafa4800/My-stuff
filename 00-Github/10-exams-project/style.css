@@ -1,0 +1,9 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.canvas-body {
+  text-align:center;
+  /* text-align works, but there might be a more proper way to align to the center */
+}
