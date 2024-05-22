@@ -1,0 +1,16 @@
+body {
+    background-color: #333; /* This is a light dark color */
+}
+
+Canvas {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    text-align:center;
+    height: 50vh;
+    width: 50vw;
+    background-color: #E9E6E5;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
