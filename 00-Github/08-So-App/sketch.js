@@ -24,7 +24,7 @@ let startButton;
 let navButton;
 let sensorData;
 let time = 0;
-const cooldownDuration = 5000;
+const cooldownDuration = 2000;
 
 // Navigation options
 let homeDataOptions = ["Home", "Data"];
@@ -81,21 +81,32 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(20);
 
-  // MQTT connection setup
-  connection = mqtt.connect("wss://mqtt.nextservices.dk")
-  connection.on("connect", () => {
-    console.log("Er nu forbundet til Next's MQTT server")    
-  })
-  
-  
+// MQTT connection setup
+// Establish a connection to the MQTT broker using a secure WebSocket (WSS) connection
+connection = mqtt.connect("wss://mqtt.nextservices.dk")
+
+// Event listener for when the connection is successfully established
+connection.on("connect", () => {
+  console.log("Er nu forbundet til Next's MQTT server")  // Log a message indicating successful connection to the console
+})
+
+// Subscribe to the 'iHateLife' topic to receive messages published on this topic
 connection.subscribe('iHateLife')
+
+// Event listener for when a message is received on any subscribed topic
 connection.on("message", (topic, ms) => {
-  console.log("Modtager data: " + ms + " - på emnet: " + topic) 
+  console.log("Modtager data: " + ms + " - på emnet: " + topic)  // Log the received message and topic to the console
+  
+  // Convert the message payload to a string and assign it to the variable 'sensorData'
   sensorData = ms.toString()
+  
+  // Check if the value of 'sensorData' is greater than 600
   if(sensorData > 600){
+    // If the condition is met, call the 'cooldown' function
     cooldown()
   }
 })
+
 
   // Start button setup
   startButton = createButton("START GAME");

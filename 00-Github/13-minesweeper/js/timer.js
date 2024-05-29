@@ -8,6 +8,7 @@ timer();
 // Array to represent the timer digits: hundreds, tens, and ones
 let t = [0, 0, 0];
 
+
 // Function to handle the timer logic
 function timer() {
     if (running) {
@@ -41,8 +42,12 @@ function timer() {
         }
     }
 
+
     // Call the timer function again after 1000 milliseconds (1 second)
     setTimeout(timer, 1000);
+    console.log("Timer running");
+
+
 }
 
 // Function to stop the timer
