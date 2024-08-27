@@ -40,12 +40,14 @@ function timer() {
         for (let i = 0; i < 3; i++) {
             document.getElementById("timer" + i).src = path + t[i] + ext;
         }
+        console.log("Timer running");
+        console.log(t);
     }
 
 
     // Call the timer function again after 1000 milliseconds (1 second)
     setTimeout(timer, 1000);
-    console.log("Timer running");
+
 
 
 }
