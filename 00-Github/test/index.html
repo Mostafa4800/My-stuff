@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Your App Title</title>
+</head>
+
+<body>
+    <div id="navbar">
+        <div id="loggedInMessage"></div>
+        <div id="time"></div>
+        <div id="navbarDropdown">
+            <button onclick="toggleNavbar()">☰</button>
+            <div id="navbarOptions" style="display: none;">
+                <button onclick="logout()">Log Out</button>
+                <button onclick="deleteAccount()">Delete Account</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="backgroundContainer">
+        <div id="loginContainer">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Username">
+                <div id="usernameError" class="error-message"></div>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Password">
+                <div id="passwordError" class="error-message"></div>
+            </div>
+            <div class="button-group">
+                <button onclick="checkLogin()">Login</button>
+                <button onclick="signUp()">Sign Up</button>
+            </div>
+
+            <div id="loginError" class="error-message"></div>
+        </div>
+
+        <div id="loggedInContainer">
+            <h1>Welcome!</h1>
+
+            <div id="likedSongsContainer">
+                <h2>Songs</h2>
+                <div id="likedSongs"></div>
+            </div>
+        </div>
+        <div id="fullScreenMessage"></div>
+        <script src="script.js"></script>
+
+</html>
