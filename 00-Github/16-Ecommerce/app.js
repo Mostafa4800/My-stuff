@@ -51,6 +51,7 @@ console.log(scrollPos);
         shopMenu.classList.remove('highlight');
         productsMenu.classList.remove('highlight');
         aboutMenu.classList.remove('highlight');
+        console.log(1);
         return;
     }
 

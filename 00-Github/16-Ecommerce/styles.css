@@ -196,7 +196,8 @@ padding-top: 80px;
 
 .footer__container {
     background-color: #131313;
-    padding: 5rem 0;
+    margin: 0;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
