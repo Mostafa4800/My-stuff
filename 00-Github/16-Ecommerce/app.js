@@ -22,25 +22,25 @@ const highlightMenu = () => {
 console.log(scrollPos);
 
     // adds 'highlight' class to my menu items
-    if (window.innerWidth > 960 && scrollPos < 900) {
+    if (window.innerWidth > 960 && scrollPos < 899) {
         aboutMenu.classList.remove('highlight');
         productsMenu.classList.remove('highlight');
         shopMenu.classList.remove('highlight');
                 contactMenu.classList.remove('highlight');
         return;
-    } else if (window.innerWidth > 960 && scrollPos < 1744) {
+    } else if (window.innerWidth > 960 && scrollPos < 1743) {
         aboutMenu.classList.add('highlight');
         productsMenu.classList.remove('highlight');
         shopMenu.classList.remove('highlight');
         contactMenu.classList.remove('highlight');
         return;
-    } else if (window.innerWidth > 960 && scrollPos < 2972) {
+    } else if (window.innerWidth > 960 && scrollPos < 2971) {
         productsMenu.classList.add('highlight');
         aboutMenu.classList.remove('highlight');
         shopMenu.classList.remove('highlight');
         contactMenu.classList.remove('highlight');
         return;
-    } else if (window.innerWidth > 960 && scrollPos < 3816) {
+    } else if (window.innerWidth > 960 && scrollPos < 3815) {
         shopMenu.classList.add('highlight');
         productsMenu.classList.remove('highlight');
         aboutMenu.classList.remove('highlight');
