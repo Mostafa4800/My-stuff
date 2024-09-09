@@ -3,9 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecommerce</title>
+    <title>Mini Grid Layout</title>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAW_AppWutQBpYElM1rpLWoz2reDlSs6VY&callback=console.debug&libraries=maps,marker&v=beta">
+    </script>
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous" />
+    <link rel="stylesheet" href="styles.css">
+   
 </head>
 <body>
-    
+
+        <!-- Navbar Section -->
+        <nav class="navbar">
+            <div class="navbar__container">
+                <a href="#home" id="navbar__logo">LOVELY</a>
+                <div class="navbar__toggle" id="mobile-menu">
+                    <span class="bar"></span> <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <ul class="navbar__menu">
+                    <li class="navbar__item">
+                        <a href="#about" class="navbar__links" id="about-page">About</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#products" class="navbar__links" id="products-page">Products</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#shop" class="navbar__links" id="shop-page">Shop</a>
+              </li>
+              <li class="navbar__item">
+                <a href="#contact" class="navbar__links" id="contact-page">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="home" id="home">
+            <div class="home__container">
+                    <img src="https://placehold.co/1300x500" alt="placeholder">
+                    <div class="home-text">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac lacus quam. Donec fermentum interdum massa, vel facilisis orci hendrerit non. Pellentesque nec ex tellus. Maecenas ultrices semper dolor, ut accumsan ex condimentum non. Pellentesque luctus mollis leo eget rhoncus. In hac habitasse platea dictumst. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero lectus, tristique at volutpat ac, rutrum in orci. Morbi tempus fermentum tempus. Praesent quis tellus in mauris ornare interdum. Aenean ac lobortis elit. Integer sit amet quam fermentum, elementum sem sed, gravida mauris. Nam volutpat ultrices mauris, at bibendum augue. Curabitur tristique sem a neque tincidunt elementum.
+
+                            Ut velit nunc, placerat cursus convallis non, faucibus sed erat. Sed tristique dignissim purus, non ullamcorper eros dapibus a. Mauris finibus tempus sodales. In pulvinar, tellus et volutpat cursus, sapien dui tempus nibh, at tincidunt sapien magna et nunc. Sed dignissim placerat magna, a bibendum turpis pulvinar at. In eget facilisis lacus, non tristique nisi. Quisque nibh velit, interdum ut commodo eget, malesuada id lorem. Fusce non arcu iaculis, condimentum lacus eget, eleifend nisl.
+                            
+                            Proin at fringilla ante, sit amet volutpat est. In ut auctor magna. Fusce dapibus hendrerit purus, ac viverra turpis molestie ut. Nunc vel eros.</p>
+                        
+                    </div>
+            </div>
+        </div>
+        
+        <div class="main" id="about">
+            <div class="about__container">
+                    <div class="about__text">  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac lacus quam. Donec fermentum interdum massa, vel facilisis orci hendrerit non. Pellentesque nec ex tellus. Maecenas ultrices semper dolor, ut accumsan ex condimentum non. Pellentesque luctus mollis leo eget rhoncus. In hac habitasse platea dictumst. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero lectus, tristique at volutpat ac, rutrum in orci. Morbi tempus fermentum tempus. Praesent quis tellus in mauris ornare interdum. Aenean ac lobortis elit. Integer sit amet quam fermentum, elementum sem sed, gravida mauris. Nam volutpat ultrices mauris, at bibendum augue. Curabitur tristique sem a neque tincidunt elementum.
+
+                        Ut velit nunc, placerat cursus convallis non, faucibus sed erat. Sed tristique dignissim purus, non ullamcorper eros dapibus a. Mauris finibus tempus sodales. In pulvinar, tellus et volutpat cursus, sapien dui tempus nibh, at tincidunt sapien magna et nunc. Sed dignissim placerat magna, a bibendum turpis pulvinar at. In eget facilisis lacus, non tristique nisi. Quisque nibh velit, interdum ut commodo eget, malesuada id lorem. Fusce non arcu iaculis, condimentum lacus eget, eleifend nisl.
+                        
+                        Proin at fringilla ante, sit amet volutpat est. In ut auctor magna. Fusce dapibus hendrerit purus, ac viverra turpis molestie ut. Nunc vel eros.</p>
+                    </div>
+                    <img src="https://placehold.co/400x400" alt="placeholder">
+
+                    <div>
+                        <img src="https://placehold.co/400x350" alt="placeholder">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In et at fuga quia</p>
+                    </div>
+                    <div>
+                        <img src="https://placehold.co/400x350" alt="placeholder">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In et at fuga quia</p>
+                    </div>
+                    <div>
+                        <img src="https://placehold.co/400x350" alt="placeholder">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In et at fuga quia</p>
+                    </div>
+            </div>
+        </div>
+
+        <div class="main2" id="products">
+            <div class="products__container">
+                <div class="products__text">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce condimentum dictum odio, sed pharetra urna suscipit nec. Curabitur nulla leo, tincidunt eu tortor eget, vulputate pulvinar ante. Nulla scelerisque a erat ut rhoncus. Nam posuere dignissim felis, ac porttitor ipsum bibendum sed. Nunc sit amet lacus lacus. Nulla facilisi. Vestibulum cursus, libero at condimentum molestie, diam lorem bibendum eros, mattis viverra purus leo in turpis. Integer imperdiet orci non ante commodo fermentum. Duis et efficitur risus. Morbi sit amet nibh rutrum, pulvinar dolor vitae, malesuada ante. Integer pellentesque ante erat, at pharetra lacus pulvinar a. Morbi imperdiet iaculis diam, id tristique lacus finibus ac. Nulla varius risus sed nisl commodo, at eleifend lorem egestas. Fusce mollis libero quis massa rhoncus luctus. Fusce volutpat dapibus metus, eu blandit tellus porta at. Integer ut viverra ex, aliquet pellentesque ante.
+
+                        Aliquam aliquet, sem vel venenatis tempus, ex orci porttitor ligula, et scelerisque orci massa vel quam. Proin augue dui, vulputate id tincidunt quis, interdum sed nulla. Nulla nec lacus ultrices, tristique mauris ac, elementum nisl. Fusce sit amet lacinia ipsum. Pellentesque non accumsan purus. Donec sapien arcu, ultrices ac sapien sed, rhoncus dictum nisi. Donec pretium nibh tellus, vitae dignissim tellus tempor et. Praesent in massa lorem.</p>
+                </div>
+                <img src="https://placehold.co/300x300" alt="placeholder">
+                <img src="https://placehold.co/300x300" alt="placeholder">
+                <img src="https://placehold.co/300x300" alt="placeholder">
+                <img src="https://placehold.co/300x300" alt="placeholder">
+                <img src="https://placehold.co/300x300" alt="placeholder">
+                <img src="https://placehold.co/300x300" alt="placeholder">
+                <img src="https://placehold.co/300x300" alt="placeholder">
+                <img src="https://placehold.co/300x300" alt="placeholder">
+                <img src="https://placehold.co/300x300" alt="placeholder">
+                <img src="https://placehold.co/300x300" alt="placeholder">
+                <img src="https://placehold.co/300x300" alt="placeholder">
+                <img src="https://placehold.co/300x300" alt="placeholder">
+            </div>
+        </div>
+
+        <div class="main" id="shop">
+            <div class="shop__container">
+                <div class="shop__text">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce condimentum dictum odio, sed pharetra urna suscipit nec. Curabitur nulla leo, tincidunt eu tortor eget, vulputate pulvinar ante. Nulla scelerisque a erat ut rhoncus. Nam posuere dignissim felis, ac porttitor ipsum bibendum sed. Nunc sit amet lacus lacus. Nulla facilisi. Vestibulum cursus, libero at condimentum molestie, diam lorem bibendum eros, mattis viverra purus leo in turpis. Integer imperdiet orci non ante commodo fermentum. Duis et efficitur risus. Morbi sit amet nibh rutrum, pulvinar dolor vitae, malesuada ante. Integer pellentesque ante erat, at pharetra lacus pulvinar a. Morbi imperdiet iaculis diam, id tristique lacus finibus ac. Nulla varius risus sed nisl commodo, at eleifend lorem egestas. Fusce mollis libero quis massa rhoncus luctus. Fusce volutpat dapibus metus, eu blandit tellus porta at. Integer ut viverra ex, aliquet pellentesque ante.
+
+                    Aliquam aliquet, sem vel venenatis tempus, ex orci porttitor ligula, et scelerisque orci massa vel quam. Proin augue dui, vulputate id tincidunt quis, interdum sed nulla. Nulla nec lacus ultrices, tristique mauris ac, elementum nisl. Fusce sit amet lacinia ipsum. Pellentesque non accumsan purus. Donec sapien arcu, ultrices ac sapien sed, rhoncus dictum nisi. Donec pretium nibh tellus, vitae dignissim tellus tempor et. Praesent in massa lorem.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce condimentum dictum odio, sed pharetra urna suscipit nec. Curabitur nulla leo, tincidunt eu tortor eget, vulputate pulvinar ante. Nulla scelerisque a erat ut rhoncus. Nam posuere dignissim felis, ac porttitor ipsum bibendum sed. Nunc sit amet lacus lacus. Nulla facilisi. Vestibulum cursus, libero at condimentum molestie, diam lorem bibendum eros, mattis viverra purus leo in turpis. Integer imperdiet orci non ante commodo fermentum. Duis et efficitur risus. Morbi sit amet nibh rutrum, pulvinar dolor vitae, malesuada ante. Integer pellentesque ante erat, at pharetra lacus pulvinar a. Morbi imperdiet iaculis diam, id tristique lacus finibus ac. Nulla varius risus sed nisl commodo, at eleifend lorem egestas. Fusce mollis libero quis massa rhoncus luctus. Fusce volutpat dapibus metus, eu blandit tellus porta at. Integer ut viverra ex, aliquet pellentesque ante.
+
+                    Aliquam aliquet, sem vel venenatis tempus, ex orci porttitor ligula, et scelerisque orci massa vel quam. Proin augue dui, vulputate id tincidunt quis, interdum sed nulla. Nulla nec lacus ultrices, tristique mauris ac, elementum nisl. Fusce sit amet lacinia ipsum. Pellentesque non accumsan purus. Donec sapien arcu, ultrices ac sapien sed, rhoncus dictum nisi. Donec pretium nibh tellus, vitae dignissim tellus tempor et. Praesent in massa lorem.</p>
+                </div>
+                <div id="maps">           
+                    <gmp-map
+                   center="43.4142989,-124.2301242"
+                   zoom="4"
+                   map-id="DEMO_MAP_ID"
+                   style="height: 100%"
+                   style="width: 100%;"
+                 >
+                   <gmp-advanced-marker
+                     position="37.4220656,-122.0840897"
+                     title="Mountain View, CA"
+                   ></gmp-advanced-marker>
+                   <gmp-advanced-marker
+                     position="47.648994,-122.3503845"
+                     title="Seattle, WA"
+                   ></gmp-advanced-marker>
+                 </gmp-map>
+               </div>
+            </div>
+        </div>
+        
+        <div class="landing_page" id="contact">
+            <div class="responsive-container-block big-container">
+              <img class="bg-img" id="iq5bf" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/clothes-bg.png">
+              <div class="responsive-container-block container">
+                <div class="responsive-cell-block wk-desk-6 wk-ipadp-6 wk-tab-12 wk-mobile-12 left-one">
+                  <div class="content-box">
+                    <p class="text-blk section-head">
+                      Lorem ipsum amet dolor
+                    </p>
+                    <p class="text-blk section-subhead">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis volupta
+                    </p>
+                    <div class="icons-container">
+                      <a class="share-icon">
+                        <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-twitter.png">
+                      </a>
+                      <a class="share-icon">
+                        <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-facebook.png">
+                      </a>
+                      <a class="share-icon">
+                        <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-google.png">
+                      </a>
+                      <a class="share-icon">
+                        <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-instagram.png">
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="responsive-cell-block wk-ipadp-6 wk-tab-12 wk-mobile-12 wk-desk-6 right-one" id="i1zj">
+                  <form class="form-box">
+                    <div class="container-block form-wrapper">
+                      <p class="text-blk contactus-head">
+                        <a class="link" href="">
+                        </a>
+                        Get a quote
+                      </p>
+                      <p class="text-blk contactus-subhead">
+                        We will get back to you in 24 hours
+                      </p>
+                      <div class="responsive-container-block">
+                        <div class="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-12 wk-ipadp-12" id="i10mt-7">
+                          <input class="input" id="ijowk-7" name="FirstName" placeholder="First Name">
+                        </div>
+                        <div class="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-12 wk-ipadp-12" id="i1ro7">
+                          <input class="input" id="indfi-5" name="Last Name" placeholder="Last Name">
+                        </div>
+                        <div class="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-6 wk-ipadp-6 emial" id="ityct">
+                          <input class="input" id="ipmgh-7" name="Email" placeholder="Email">
+                        </div>
+                        <div class="responsive-cell-block wk-desk-6 wk-ipadp-6 wk-tab-12 wk-mobile-12">
+                          <input class="input" id="imgis-6" name="PhoneNumber" placeholder="Phone Number">
+                        </div>
+                        <div class="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-12 wk-ipadp-12" id="i634i-7">
+                          <textarea aria-placeholder="Type message here" class="textinput" id="i5vyy-7" placeholder="Type message here"></textarea>
+                        </div>
+                      </div>
+                      <button class="submit-btn">
+                        Get quote
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+         <!-- Footer Section -->
+    <div class="footer__container">
+        <div class="footer__links">
+            <div class="footer__link--wrapper"></div>
+        </div>
+        <section class="social__media">
+            <div class="social__media--wrap">
+                <div class="footer__logo">
+                    <a href="" id="footer__logo">LOVELY</a>
+                </div>
+                <p class="website__rights">© LOVELY 2024. All rights reserved</p>
+                <div class="social__icons">
+                      <a href="" class="share-icon">
+                        <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-twitter.png">
+                      </a>
+                      <a href="" class="share-icon">
+                        <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-facebook.png">
+                      </a>
+                      <a href="" class="share-icon">
+                        <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-google.png">
+                      </a>
+                      <a href="" class="share-icon">
+                        <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-instagram.png">
+                      </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>
