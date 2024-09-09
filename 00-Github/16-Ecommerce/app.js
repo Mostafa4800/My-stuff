@@ -26,21 +26,21 @@ console.log(scrollPos);
         aboutMenu.classList.remove('highlight');
         productsMenu.classList.remove('highlight');
         shopMenu.classList.remove('highlight');
-        contactMenu.classList.remove('highlight');
+                contactMenu.classList.remove('highlight');
         return;
-    } else if (window.innerWidth > 960 && scrollPos < 1828) {
+    } else if (window.innerWidth > 960 && scrollPos < 1744) {
         aboutMenu.classList.add('highlight');
         productsMenu.classList.remove('highlight');
         shopMenu.classList.remove('highlight');
         contactMenu.classList.remove('highlight');
         return;
-    } else if (window.innerWidth > 960 && scrollPos < 3056) {
+    } else if (window.innerWidth > 960 && scrollPos < 2972) {
         productsMenu.classList.add('highlight');
         aboutMenu.classList.remove('highlight');
         shopMenu.classList.remove('highlight');
         contactMenu.classList.remove('highlight');
         return;
-    } else if (window.innerWidth > 960 && scrollPos < 3905) {
+    } else if (window.innerWidth > 960 && scrollPos < 3816) {
         shopMenu.classList.add('highlight');
         productsMenu.classList.remove('highlight');
         aboutMenu.classList.remove('highlight');
