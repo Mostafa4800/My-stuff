@@ -1,0 +1,113 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+header{
+    width:100vw;
+    height:12vh;
+    position:fixed;
+    z-index:2;
+    background-color:lightgray;
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    transition:all .3s ease-in-out;
+}
+
+header.hidden{
+    height:2vh;
+}
+
+header.hidden:hover{
+    height:12vh;
+}
+
+header#leftmenu{
+    width:20vw;
+    height:100vh;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(4, 10rem);
+}
+
+.menuitem{
+    width:100%;
+    height:100%;
+    font-size:2rem;
+    display:grid;
+    place-items:center;
+    border-bottom:1px solid black;
+    cursor: pointer;
+    transition: 0.3s all ease-in-out;
+}
+
+.menuitem:hover{
+    border-bottom:6px solid black;
+    font-size:2.4rem;
+}
+
+.menuitem.active{
+    border-bottom:6px solid steelblue;
+}
+
+header.hidden .menuitem{
+    font-size:0;
+}
+
+header.hidden:hover .menuitem{
+    font-size:2rem;
+}
+
+/* Her er en kommentar */
+
+.page{
+    position:fixed;
+    left:-100vw;
+    height: 100vh;
+    width:100vw;
+    top:0vh;
+    overflow:hidden;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    transition: 0.3s 0.3s all ease-in-out;
+}
+
+.visible{
+    left:0;
+    transition: 0.3s all ease-in-out;
+}
+
+.left, .right{
+    width:100%;
+    height:100%;
+    padding:5vw;
+    display:grid;
+    place-items:center;
+    background-size: cover;
+}
+
+.left{
+    background-color:whitesmoke;
+}
+
+
+#page1{
+    background-color: lightskyblue;
+}
+
+#page2{
+    background-color: lightgreen;
+}
+
+#page3{
+    background-color: lightcyan;
+}
+
+#page4{
+    background-color: lightseagreen;
+}
+
+h1{
+    font-family: Raleway;
+    color:hotpink;
+}
