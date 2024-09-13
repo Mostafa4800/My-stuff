@@ -394,29 +394,25 @@ padding-top: 80px;
 .products__container {
     z-index: 1;
     width: 100%;
-    margin-left: 2rem;
-    margin-right: 2rem;
     padding-top:100px;  
+    max-width: 1300px;
     margin: 0 auto;
 
-    
 }
 
 .products__text{
-  width:100%;
-  text-align: left;
-  padding:20px;
+text-align: left;
+padding: 20px;
+margin: 0 auto;
 }
 
 .products{
   grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
   grid-template-rows:auto;
   display:grid;
-  margin: 2rem;
-  row-gap: 2rem;
-  justify-content: center; /* centers items horizontally */
-  align-items: center; /* centers items vertically */
 
+  row-gap: 2rem;
+  column-gap: 2rem;
 }
 .products > * {
   margin: 0 auto; /* Ensure grid items are centered within their grid cells */
