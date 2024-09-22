@@ -400,23 +400,34 @@ padding-top: 80px;
 
 }
 
-.products__text{
-text-align: left;
-padding: 20px;
-margin: 0 auto;
-}
 
-.products{
-  grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
-  grid-template-rows:auto;
-  display:grid;
-
-  row-gap: 2rem;
-  column-gap: 2rem;
+.products__text {
+ text-align: left;
+  padding: 20px;
+  margin: 0 auto;
 }
-.products > * {
-  margin: 0 auto; /* Ensure grid items are centered within their grid cells */
-}
+  
+  .products {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-rows: auto;
+    display: grid;
+    row-gap: 2rem;
+    column-gap: 2rem;
+  }
+  
+  .products > * {
+    margin: 0 auto; /* Ensure grid items are centered within their grid cells */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .products img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem; /* Space between image and description */
+  }
 
 
 /* Always set the map height explicitly to define the size of the div

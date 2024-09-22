@@ -75,3 +75,127 @@ const hideMobileMenu = () => {
 menuLinks.addEventListener('click', hideMobileMenu);
 navLogo.addEventListener('click', hideMobileMenu);
 
+//api
+
+const apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic";
+const apiUrl2 = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic";
+
+
+// Make a GET request
+fetch(apiUrl2)
+  .then(response => {
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error('Data not found');
+      } else if (response.status === 500) {
+        throw new Error('Server error');
+      } else {
+        throw new Error('Network response was not ok');
+      }
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log("Data received:", data); // Logging the data structure
+    const product = document.getElementById('products2');
+  
+    // Access the 'drinks' array from the 'data' object
+    const drinks = data.drinks;
+
+    // Check if 'drinks' is an array
+    if (Array.isArray(drinks)) {
+      drinks.forEach(item => {
+        const div = document.createElement('div');
+        
+        // Customize this to display specific properties of the item
+        const name = document.createElement('h2');
+        name.textContent = item.strDrink; // Assuming 'strDrink' is a property of the item
+        div.appendChild(name);
+        
+        const image = document.createElement('img');
+        image.src = item.strDrinkThumb; // Assuming 'strDrinkThumb' is a property of the item
+        image.alt = item.strDrink; // Set alt text to the name of the item
+        div.appendChild(image);
+        
+        const description = document.createElement('p');
+        description.textContent = item.strInstructions || 'No description available'; // Assuming 'strInstructions' is a property of the item
+        div.appendChild(description);
+        
+        product.appendChild(div);
+      });
+    } else {
+      console.error("Data is not an array:", drinks);
+    }
+  })
+    
+
+   /* data.forEach(item => {
+      const div = document.createElement('div');
+      div.textContent = JSON.stringify(item); // Customize this to display the data as needed
+      product.appendChild(div);
+    });
+    */
+  
+
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+  fetch(apiUrl)
+  .then(response => {
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error('Data not found');
+      } else if (response.status === 500) {
+        throw new Error('Server error');
+      } else {
+        throw new Error('Network response was not ok');
+      }
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log("Data received:", data); // Logging the data structure
+    const product = document.getElementById('products2');
+  
+    // Access the 'drinks' array from the 'data' object
+    const drinks = data.drinks;
+
+    // Check if 'drinks' is an array
+    if (Array.isArray(drinks)) {
+      drinks.forEach(item => {
+        const div = document.createElement('div');
+        
+        // Customize this to display specific properties of the item
+        const name = document.createElement('h2');
+        name.textContent = item.strDrink; // Assuming 'strDrink' is a property of the item
+        div.appendChild(name);
+        
+        const image = document.createElement('img');
+        image.src = item.strDrinkThumb; // Assuming 'strDrinkThumb' is a property of the item
+        image.alt = item.strDrink; // Set alt text to the name of the item
+        div.appendChild(image);
+        
+        const description = document.createElement('p');
+        description.textContent = item.strInstructions || 'No description available'; // Assuming 'strInstructions' is a property of the item
+        div.appendChild(description);
+        
+        product.appendChild(div);
+      });
+    } else {
+      console.error("Data is not an array:", drinks);
+    }
+  })
+    
+
+   /* data.forEach(item => {
+      const div = document.createElement('div');
+      div.textContent = JSON.stringify(item); // Customize this to display the data as needed
+      product.appendChild(div);
+    });
+    */
+  
+
+  .catch(error => {
+    console.error('Error:', error);
+  });
